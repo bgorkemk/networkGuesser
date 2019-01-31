@@ -1,0 +1,256 @@
+{
+    "Question":
+    
+[
+    {
+        "category": "history",
+        "question": "Dünyanın en eski arabası kaç yılında yapılmıştır?",
+        "answer": "1886"
+    },
+    {
+        "category": "history",
+        "question": "Modern fiziğin babası Galileo kaç yılında doğmuştur?",
+        "answer": "1564"
+    },
+    {
+        "category": "history",
+        "question": "Yeni Çağı bitirip Yakın Çağı başlatan sebeplerden olan Fransız İhtilalı kaç yılında bitmiştir?",
+        "answer": "1799"
+    },
+    {
+        "category": "history",
+        "question": "Yazının bulunmasıyla başlayıp - Batı Roma İmparatorluğunun yıkılışına kadar süren İlk Çağ milattan önce kaç yılında başlamıştır?",
+        "answer": "4000"
+    },
+    {
+        "category": "history",
+        "question": "Batı Roma İmparatorluğunun yıkılışından - İstanbul'un Türkler tarafından fethine kadar süren Orta Çağ kaç yılında başlamıştır?",
+        "answer": "476"
+    },
+    {
+        "category": "history",
+        "question": "İstanbul'un fethinden başlayıp - Fransız İhtilaline kadar süren Yeni Çağ kaç yılında başlamıştır?",
+        "answer": "1453"
+    },
+    {
+        "category": "history",
+        "question": "Fransız İhtilali ile başlayıp - halen içinde bulunduğumuz Yakın Çağ kaç yılında başlamıştır?",
+        "answer": "1789"
+    },
+    {
+        "category": "history",
+        "question": "Osmanlı Devleti'nin kuruluş tarihi kaçtır?",
+        "answer": "1299"
+    },
+    {
+        "category": "history",
+        "question": "Osmanlı Devleti kaçıncı Türk Devletidir?",
+        "answer": "16"
+    },
+    {
+        "category": "history",
+        "question": "Sovyetler Birliği kaç yılında dağılmıştır?",
+        "answer": "1991"
+    },
+    {
+        "category": "history",
+        "question": "Amerika kıtası kaç yılında keşfedilmiştir?",
+        "answer": "1492"
+    },
+    {
+        "category": "history",
+        "question": "Kristof Kolomb kaç yılında doğmuştur?",
+        "answer": "1451"
+    },
+    {
+        "category": "history",
+        "question": "Star Wars'un ilk filmi A New Hope kaç yılında çekilmiştir?",
+        "answer": "1977"
+    },
+    {
+        "category": "history",
+        "question": "Yüzüklerin Efendisi kitabının yazarı J.R.R Tolkien kaç yılında doğmuştur?",
+        "answer": "1892"
+    },
+    {
+        "category": "history",
+        "question": "Kavimler Göçü hangi yıl başlamıştır?",
+        "answer": "350"
+    },
+    {
+        "category": "history",
+        "question": "Son peygamber Hz. Muhammed'in kaç yılında doğmuştur?",
+        "answer": "571"
+    },
+    {
+        "category": "history",
+        "question": "Şapka kanunu kaç yılında çıkarılmıştır?",
+        "answer": "1925"
+    },
+    {
+        "category": "history",
+        "question": "Kılık kıyafet kanunu kaç yılında çıkarılmıştır?",
+        "answer": "1934"
+    },
+    {
+        "category": "history",
+        "question": "II.Dünya Savaşı kaç yılında başlamıştır?",
+        "answer": "1939"
+    },
+    {
+        "category": "history",
+        "question": "Önemli fizikçilerden Isaac Newton hangi yıl doğmuştur?",
+        "answer": "1643"
+    },
+    {
+        "category": "history",
+        "question": "Antik klasik yunan filozofu Platon milattan önce kaç yılında doğmuştur?",
+        "answer": "427"
+    },
+    {
+        "category": "history",
+        "question": "Antik klasik yunan felsefesinin kurucularından Sokrates milattan önce kaç yılında doğmuştur?",
+        "answer": "469"
+    },
+    {
+        "category": "history",
+        "question": "Osmanlı baş mimarı ve inşaat mühendisi Mimar Sinan kaç yılında doğmuştur?",
+        "answer": "1489"
+    },
+    {
+        "category": "history",
+        "question": "Büyük Çin bilgesi, filozof, siyasal yönetici olan Konfüçyüs milattan önce kaç yılında doğmuştur?",
+        "answer": "551"
+    },
+    {
+        "category": "history",
+        "question": "Alman filozof, politik ekonomist ve devrimci Karl Marx kaç yılında doğmuştur?",
+        "answer": "1818"
+    },
+    {
+        "category": "history",
+        "question": "Ünlü Fransız yazar ve düşünür, felsefi içerikli romanların yazarı Jean-Paul Sartre kaç yılında doğmuştur?",
+        "answer": "1905"
+    },
+    {
+        "category": "history",
+        "question": "Fenerbahçe Futbol Takımı kaç yılında kurulmuştur?",
+        "answer": "1907"
+    },
+    {
+        "category": "history",
+        "question": "Galatasaray Futbol Takımı kaç yılında kurulmuştur?",
+        "answer": "1905"
+    },
+    {
+        "category": "history",
+        "question": "Beşiktaş Jimnastik Kulübü kaç yılında kurulmuştur?",
+        "answer": "1903"
+    },
+    {
+        "category": "history",
+        "question": "Beşiktaş Jimnastik Kulübü kaç yılında kurulmuştur?",
+        "answer": "1903"
+    },
+    {
+        "category": "history",
+        "question": "İlk Hastane Hristiyanların buluşu olup kaç yılında yapılmıştır?",
+        "answer": "368"
+    },
+    {
+        "category": "history",
+        "question": "Çinde eskiden beri bilinip, Avrupaya daha sonra gelen ilk pusula hangi yıl gelmiştir?",
+        "answer": "1190"
+    },
+    {
+        "category": "history",
+        "question": "Gözlük daha doğrusu yakını gösteren mercek kaç yılında bulunmuştur?",
+        "answer": "1316"
+    },
+    {
+        "category": "history",
+        "question": "Kakao Amerikada bulunanlar dışında ne zaman keşfedilmiştir?",
+        "answer": "1492"
+    },
+    {
+        "category": "history",
+        "question": "Teleskop kaç yılında icat edilmiştir?",
+        "answer": "1608"
+    },
+    {
+        "category": "history",
+        "question": "Hollandalı Huyghens cep saatini kaç yılında bulmuştur?",
+        "answer": "1670"
+    },
+    {
+        "category": "history",
+        "question": "Buhar gücünden yararlanılıp ilk faydalı uygulama hangi yıl yapılmıştır?",
+        "answer": "1712"
+    },
+    {
+        "category": "history",
+        "question": "Ağaç oyma tekniği kullanılarak yapılan ilk matbaa hangi yıl üretilmiştir?",
+        "answer": "593"
+    },
+    {
+        "category": "history",
+        "question": "İlk yolcuları bir horoz, bir koyun ve bir ördek olan uçan balon hangi yıl yapılmıştır?",
+        "answer": "1783"
+    },
+    {
+        "category": "history",
+        "question": "İlk haber toplama ve dağıtma gazetesi olan Acta Diurna milattan önce kaç yılında basılmıştır?",
+        "answer": "59"
+    },
+    {
+        "category": "history",
+        "question": "İlk haber toplama ve dağıtma gazetesi olan Acta Diurna milattan önce kaç yılında basılmıştır?",
+        "answer": "59"
+    },
+    {
+        "category": "history",
+        "question": "Londra'da yayın hayatına başlamış olan The Times gazetesinin ilk basımı hangi yıl yapılmıştır?",
+        "answer": "1788"
+    },
+    {
+        "category": "history",
+        "question": "Everest Dağı'na ilk tırmanan iki dağcı bu olayı hangi yıl gerçekleştirmiştir?",
+        "answer": "1953"
+    },
+    {
+        "category": "history",
+        "question": "Ay'a ilk yapay uydu hangi yıl fırlatılmıştır?",
+        "answer": "1957"
+    },
+    {
+        "category": "history",
+        "question": "Ay'a ilk ayak basan insan, Neil Armstrong bu ünvanı hangi yıl almıştır?",
+        "answer": "1969"
+    },
+    {
+        "category": "history",
+        "question": "Telefon hangi yıl icat edilmiştir?",
+        "answer": "1876"
+    },
+    {
+        "category": "history",
+        "question": "İlk mekanik bilgisayar hangi yıl icat edilmiştir?",
+        "answer": "1822"
+    },
+    {
+        "category": "history",
+        "question": "Bilgisayar ve bilgisayarlar ile ilgili teorilerin temelini oluşturan Turing Makinesi hangi yıl icat edilmiştir?",
+        "answer": "1936"
+    },
+    {
+        "category": "history",
+        "question": "Gelmiş geçmiş en ünlü ve en etkileyici bestecilerden Ludwig van Beethoven hangi yıl doğmuştur?",
+        "answer": "1770"
+    },
+    {
+        "category": "history",
+        "question": "Türkiye'de ilk nüfus sayımı kaç yılında yapılmıştır?",
+        "answer": "1927"
+    }
+]
+}

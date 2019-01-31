@@ -1,0 +1,722 @@
+[
+    {
+        "category": "general",
+        "question": "Dünyanın en büyük köpeğinin ağırlığı kaç kilogramdır?",
+        "answer": "128"
+    },
+    {
+        "category": "general",
+        "question": "Bir çita kaç saniyede 100 kilometre hıza ulaşabilir?",
+        "answer": "5"
+    },
+    {
+        "category": "general",
+        "question": "En uzun süre aç kalabilen imparator penguen kaç güne kadar aç kalabilir?",
+        "answer": "134"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en büyük hayvanı mavi balinaların ağırlığı kaç tonu bulabilir?",
+        "answer": "150"
+    },
+    {
+        "category": "general",
+        "question": "Devekuşları saatte kaç kilometre hızla koşabilir?",
+        "answer": "98"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en hızlı kuşu bataklık kırlangıcı kaç kilometre hızla uçabilir?",
+        "answer": "335"
+    },
+    {
+        "category": "general",
+        "question": "Kartallar saatte kaç kilometre hızla uçabilirler?",
+        "answer": "340"
+    },
+    {
+        "category": "general",
+        "question": "Kılıç balığı saatte kaç kilometre hızla yüzebilir?",
+        "answer": "110"
+    },
+    {
+        "category": "general",
+        "question": "Karıncalar ağırlıklarının kaç katı yük kaldırabilirler?",
+        "answer": "50"
+    },
+    {
+        "category": "general",
+        "question": "Büyük boy timsahların ısırma gücü kaç kilograma kadar çıkabilir?",
+        "answer": "1340"
+    },
+    {
+        "category": "general",
+        "question": "İri kaplumbağaların ısırma gücü kaç kilograma kadar çıkabilir?",
+        "answer": "1000"
+    },
+    {
+        "category": "general",
+        "question": "En derine dalabilen balinagillerden olan Amber balığı kaç metre derine inebilir?",
+        "answer": "3000"
+    },
+    {
+        "category": "general",
+        "question": "Uzun yaşama süresi ile rekor kırmış Galapagos kaplumbağasının bu ömrü kaç yıl sürmüştür?",
+        "answer": "177"
+    },
+    {
+        "category": "general",
+        "question": "Hecin develeri kaç gün susuz kalabilir?",
+        "answer": "21"
+    },
+    {
+        "category": "general",
+        "question": "Karada yaşayan canlılar arasında en büyük olmasıyla bilinen Afrika Fillerinin ağırlığı kaç kilogramdır?",
+        "answer": "4500"
+    },
+    {
+        "category": "general",
+        "question": "Kuzey Amerika'da yaşayan bir tırtıl türü ağırlığının kaç katı yemek yemesiyle bilinir?",
+        "answer": "86000"
+    },
+    {
+        "category": "general",
+        "question": "Kolombiyada yaşayan Dart Poison Frog adlı kurbağa vücudunda salgıladığı zehirle kaç insanı öldürebilir?",
+        "answer": "150"
+    },
+    {
+        "category": "general",
+        "question": "Kolombiyada yaşayan Dart Poison Frog adlı kurbağa vücudunda salgıladığı zehirle kaç fareyi öldürebilir?",
+        "answer": "30000"
+    },
+    {
+        "category": "general",
+        "question": "Avustralyada yaşayan Taipan isimli yılan vücudunda salgıladığı zehirle kaç insanı öldürebilir?",
+        "answer": "100"
+    },
+    {
+        "category": "general",
+        "question": "At camiasında dörtnala rekoru saatte kaç kilometre ile kırılmıştır?",
+        "answer": "71"
+    },
+    {
+        "category": "general",
+        "question": "Amerikada bulunan dünyanın en büyük mantarı ve yaşayan organizması olan canlının kaç yıldır yaşadığı hesaplanmıştır?",
+        "answer": "2400"
+    },
+    {
+        "category": "general",
+        "question": "Seyşeller Takımadalarına özgü Coco-de-Mer palmiyesinin çekirdeklerinin çevresi kaç santimetreye kadar ulaşabilir?",
+        "answer": "3000"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en yaşlı ağacı olan Bristlecone çamlarından en yaşlısının yaşının kaç olduğu tahmin edilmektedir?",
+        "answer": "4700"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en uzun kadını Çinli Yao Defen'in boyu kaç santimetredir?",
+        "answer": "236"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en uzun adamının boyu kaç santimetredir?",
+        "answer": "290"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en uzun adamının boyu kaç santimetredir?",
+        "answer": "290"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en uzun nehirlerinden biri olan Nil Nehri kaç kilometre uzunluğundadır?",
+        "answer": "6853"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en yüksek dağı olan Everest Dağı kaç metre yüksekliktedir?",
+        "answer": "8848"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en soğuk bölgesi olan Antartika'da ölçülen en düşük sıcaklık - kaç derecedir? ",
+        "answer": "93"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en kalabalık şehri olarak bilinen Çinin nüfusu kaçtır?",
+        "answer": "1386000000"
+    },
+    {
+        "category": "general",
+        "question": "Çin Halk Cumhuriyetinin kaç ülke ile sınırı bulunmaktadır?",
+        "answer": "15"
+    },
+    {
+        "category": "general",
+        "question": "Almanya - Türkiye arası karayolu kaç kilometredir?",
+        "answer": "3002"
+    },
+    {
+        "category": "general",
+        "question": "Meksika - Türkiye arası ortalama bir uçak ile kaç saattir?",
+        "answer": "17"
+    },
+    {
+        "category": "general",
+        "question": "Türkiye'nin en doğusundan, batısına iki ucu arası kaç kilometredir?",
+        "answer": "1565"
+    },
+    {
+        "category": "general",
+        "question": "Dünya'nın yüzde kaçı Su'dan oluşur?",
+        "answer": "71"
+    },
+    {
+        "category": "general",
+        "question": "Mısır'da bulunan Keops Piramidi'nin yüksekliği kaç metredir?",
+        "answer": "139"
+    },
+    {
+        "category": "general",
+        "question": "Amerika'da bulunan Özgürlük Anıtı'nın yüksekliği kaç metredir?",
+        "answer": "93"
+    },
+    {
+        "category": "general",
+        "question": "Rio de Janeiro'da bulunan Kurtarıcı İsa heykelinin yüksekliği kaç metredir?",
+        "answer": "38"
+    },
+    {
+        "category": "general",
+        "question": "Rio de Janeiro'da bulunan Kurtarıcı İsa heykelinin yüksekliği kaç metredir?",
+        "answer": "38"
+    },
+    {
+        "category": "general",
+        "question": "Hindistan'da bulunan Tac Mahal'in yüksekliği kaç metredir?",
+        "answer": "73"
+    },
+    {
+        "category": "general",
+        "question": "Dubai'de bulunan Burc Halife gökdeleninin yüksekliği kaç metredir?",
+        "answer": "828"
+    },
+    {
+        "category": "general",
+        "question": "New York, Amerika'da bulunan Empire State gökdeleninin yüksekliği kaç metredir?",
+        "answer": "381"
+    },
+    {
+        "category": "general",
+        "question": "Dünyada toplam kaç ülke bulunmaktadır?",
+        "answer": "193"
+    },
+    {
+        "category": "general",
+        "question": "Kuzey Amerika kıtasında kaç ülke bulunmaktadır?",
+        "answer": "23"
+    },
+    {
+        "category": "general",
+        "question": "Güney Amerika kıtasında kaç ülke bulunmaktadır?",
+        "answer": "12"
+    },
+    {
+        "category": "general",
+        "question": "Avrupa kıtasının nüfusu kaç milyon kişi kadardır?",
+        "answer": "730"
+    },
+    {
+        "category": "general",
+        "question": "Avrupa kıtasında kaç ülke bulunmaktadır?",
+        "answer": "64"
+    },
+    {
+        "category": "general",
+        "question": "Afrika kıtasında kaç ülke bulunmaktadır?",
+        "answer": "54"
+    },
+    {
+        "category": "general",
+        "question": "Asya kıtasında kaç ülke bulunmaktadır?",
+        "answer": "48"
+    },
+    {
+        "category": "general",
+        "question": "Asya kıtasında kaç ülke bulunmaktadır?",
+        "answer": "48"
+    },
+    {
+        "category": "general",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Türkiye kaçıncı sıradadır?",
+        "answer": "34"
+    },
+    {
+        "category": "general",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Almanya kaçıncı sıradadır?",
+        "answer": "62"
+    },
+    {
+        "category": "general",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Birleşik Krallık kaçıncı sıradadır?",
+        "answer": "77"
+    },
+    {
+        "category": "general",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Çin kaçıncı sıradadır?",
+        "answer": "3"
+    },
+    {
+        "category": "general",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Rusya kaçıncı sıradadır?",
+        "answer": "1"
+    },
+    {
+        "category": "general",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda ABD kaçıncı sıradadır?",
+        "answer": "4"
+    },
+    {
+        "category": "general",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Japonya kaçıncı sıradadır?",
+        "answer": "61"
+    },
+    {
+        "category": "general",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Mısır kaçıncı sıradadır?",
+        "answer": "29"
+    },
+    {
+        "category": "general",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Mısır kaçıncı sıradadır?",
+        "answer": "61"
+    },
+    {
+        "category": "general",
+        "question": "New York, Amerika'da bulunan Empire State gökdeleninin kaç katı vardır?",
+        "answer": "102"
+    },
+    {
+        "category": "general",
+        "question": "Dubai'de bulunan Burc Halife gökdeleninin kaç katı vardır?",
+        "answer": "163"
+    },
+    {
+        "category": "general",
+        "question": "Venezuela'nın balta girmemiş ormanlarından birinde bulunan dünyanın en yüksek şelalesi olan Angel Şelalesi kaç metredir?",
+        "answer": "978"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en yüksek ikinci dağı olan ve Asya'da bulunan K2 Dağının yüksekliği kaç metredir?",
+        "answer": "8611"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en derin çukuru olan Mariana Çukurunun derinliği kaç metredir?",
+        "answer": "10994"
+    },
+    {
+        "category": "general",
+        "question": "Dünya üzerinde Doğu ve Batı olmak üzere toplam kaç meridyen-boylam vardır?",
+        "answer": "360"
+    },
+    {
+        "category": "general",
+        "question": "Dünya üzerinde Kuzey ve Güney olmak üzere toplam kaç paralel-enlem vardır?",
+        "answer": "180"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en uzun nehirlerinden biri olan Amazon Nehri kaç kilometre uzunluğundadır?",
+        "answer": "6992"
+    },
+    {
+        "category": "general",
+        "question": "Türkiye üzerinden kaç tane meridyen geçmektedir?",
+        "answer": "19"
+    },
+    {
+        "category": "general",
+        "question": "Türkiye'nin doğusundan batısına kaç dakika farkı vardır?",
+        "answer": "76"
+    },
+    {
+        "category": "general",
+        "question": "Vatikan şehrinin nüfusu kaç kişidir?",
+        "answer": "900"
+    },
+    {
+        "category": "general",
+        "question": "Maldiv Cumhuriyeti kaç adadan oluşan bir ada ülkesidir?",
+        "answer": "1200"
+    },
+    {
+        "category": "general",
+        "question": "Türkiye içersinde yaklaşık kaç köy vardır?",
+        "answer": "38000"
+    },
+    {
+        "category": "general",
+        "question": "Dünya bor rezervinin yüzde kaçı Türkiye'de bulunmaktadır?",
+        "answer": "70"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın yüzölçümü kaç milyon kilometrekaredir?",
+        "answer": "510"
+    },
+    {
+        "category": "general",
+        "question": "Dünya'nın yüzde kaçı Kara'dan oluşur?",
+        "answer": "29"
+    },
+    {
+        "category": "general",
+        "question": "Türkiye - İran kara sınırı yaklaşık kaç kilometredir?",
+        "answer": "454"
+    },
+    {
+        "category": "general",
+        "question": "Türkiye - Irak kara sınırı yaklaşık kaç kilometredir?",
+        "answer": "331"
+    },
+    {
+        "category": "general",
+        "question": "Türkiye - Suriye kara sınırı yaklaşık kaç kilometredir?",
+        "answer": "877"
+    },
+    {
+        "category": "general",
+        "question": "Türkiye - Nahçıvan kara sınırı yaklaşık kaç kilometredir?",
+        "answer": "10"
+    },
+    {
+        "category": "general",
+        "question": "Dünyada deniz seviyesinden en alçakta bulunan Lut Gölü - kaç metre aşağıdadır?",
+        "answer": "395"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en küçük kıtası olan Okyanusya Kıta'sı kaç milyon kilometre karedir?",
+        "answer": "9"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en büyük kıtası olan Asya Kıta'sı kaç milyon kilometre karedir?",
+        "answer": "44"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en büyük okyanusu olan Büyük Okyanus kaç milyon kilometre karedir?",
+        "answer": "180"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en küçük okyanusu olan Hint Okyanusu kaç milyon kilometre karedir?",
+        "answer": "75"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın ortalama sıcaklığı kaç C derecedir?",
+        "answer": "15"
+    },
+    {
+        "category": "general",
+        "question": "Dünya'da kaydedilen en yüksek sıcaklık kaç C derecedir?",
+        "answer": "58"
+    },
+    {
+        "category": "general",
+        "question": "Rusya'da bulunan dünyanın en yüksek barajı olan Rugunsky Barajı'nın gövde yüksekliği kaç metredir?",
+        "answer": "325"
+    },
+    {
+        "category": "general",
+        "question": "Rusya'da bulunan dünyanın en derin gölü olan Baykal Gölü'nün derinliği - kaç metredir?",
+        "answer": "1741"
+    },
+    {
+        "category": "general",
+        "question": "Ortalama ömrün en uzun olduğu ülkelerden biri olan Japonya'da erkek ömrü ortalama kaç yıldır?",
+        "answer": "77"
+    },
+    {
+        "category": "general",
+        "question": "Ortalama ömrün en uzun olduğu ülkelerden biri olan Japonya'da kadın ömrü ortalama kaç yıldır?",
+        "answer": "85"
+    },
+    {
+        "category": "general",
+        "question": "Ortalama ömrün en kısa olduğu ülkelerden biri olan Mozambik'te kadın ömrü ortalama kaç yıldır?",
+        "answer": "36"
+    },
+    {
+        "category": "general",
+        "question": "Ortalama ömrün en kısa olduğu ülkelerden biri olan Mozambik'te erkek ömrü ortalama kaç yıldır?",
+        "answer": "31"
+    },
+    {
+        "category": "general",
+        "question": "Papua Yeni Gine'de toplam kaç dil, lehçe ve ağız konuşulmaktadır?",
+        "answer": "869"
+    },
+    {
+        "category": "general",
+        "question": "Papua Yeni Gine'de toplam kaç dil, lehçe ve ağız konuşulmaktadır?",
+        "answer": "869"
+    },
+    {
+        "category": "general",
+        "question": "Dünyanın en eski arabası kaç yılında yapılmıştır?",
+        "answer": "1886"
+    },
+    {
+        "category": "general",
+        "question": "Modern fiziğin babası Galileo kaç yılında doğmuştur?",
+        "answer": "1564"
+    },
+    {
+        "category": "general",
+        "question": "Yeni Çağı bitirip Yakın Çağı başlatan sebeplerden olan Fransız İhtilalı kaç yılında bitmiştir?",
+        "answer": "1799"
+    },
+    {
+        "category": "general",
+        "question": "Yazının bulunmasıyla başlayıp - Batı Roma İmparatorluğunun yıkılışına kadar süren İlk Çağ milattan önce kaç yılında başlamıştır?",
+        "answer": "4000"
+    },
+    {
+        "category": "general",
+        "question": "Batı Roma İmparatorluğunun yıkılışından - İstanbul'un Türkler tarafından fethine kadar süren Orta Çağ kaç yılında başlamıştır?",
+        "answer": "476"
+    },
+    {
+        "category": "general",
+        "question": "İstanbul'un fethinden başlayıp - Fransız İhtilaline kadar süren Yeni Çağ kaç yılında başlamıştır?",
+        "answer": "1453"
+    },
+    {
+        "category": "general",
+        "question": "Fransız İhtilali ile başlayıp - halen içinde bulunduğumuz Yakın Çağ kaç yılında başlamıştır?",
+        "answer": "1789"
+    },
+    {
+        "category": "general",
+        "question": "Osmanlı Devleti'nin kuruluş tarihi kaçtır?",
+        "answer": "1299"
+    },
+    {
+        "category": "general",
+        "question": "Osmanlı Devleti kaçıncı Türk Devletidir?",
+        "answer": "16"
+    },
+    {
+        "category": "general",
+        "question": "Sovyetler Birliği kaç yılında dağılmıştır?",
+        "answer": "1991"
+    },
+    {
+        "category": "general",
+        "question": "Amerika kıtası kaç yılında keşfedilmiştir?",
+        "answer": "1492"
+    },
+    {
+        "category": "general",
+        "question": "Kristof Kolomb kaç yılında doğmuştur?",
+        "answer": "1451"
+    },
+    {
+        "category": "general",
+        "question": "Star Wars'un ilk filmi A New Hope kaç yılında çekilmiştir?",
+        "answer": "1977"
+    },
+    {
+        "category": "general",
+        "question": "Yüzüklerin Efendisi kitabının yazarı J.R.R Tolkien kaç yılında doğmuştur?",
+        "answer": "1892"
+    },
+    {
+        "category": "general",
+        "question": "Kavimler Göçü hangi yıl başlamıştır?",
+        "answer": "350"
+    },
+    {
+        "category": "general",
+        "question": "Son peygamber Hz. Muhammed'in kaç yılında doğmuştur?",
+        "answer": "571"
+    },
+    {
+        "category": "general",
+        "question": "Şapka kanunu kaç yılında çıkarılmıştır?",
+        "answer": "1925"
+    },
+    {
+        "category": "general",
+        "question": "Kılık kıyafet kanunu kaç yılında çıkarılmıştır?",
+        "answer": "1934"
+    },
+    {
+        "category": "general",
+        "question": "II.Dünya Savaşı kaç yılında başlamıştır?",
+        "answer": "1939"
+    },
+    {
+        "category": "general",
+        "question": "Önemli fizikçilerden Isaac Newton hangi yıl doğmuştur?",
+        "answer": "1643"
+    },
+    {
+        "category": "general",
+        "question": "Antik klasik yunan filozofu Platon milattan önce kaç yılında doğmuştur?",
+        "answer": "427"
+    },
+    {
+        "category": "general",
+        "question": "Antik klasik yunan felsefesinin kurucularından Sokrates milattan önce kaç yılında doğmuştur?",
+        "answer": "469"
+    },
+    {
+        "category": "general",
+        "question": "Osmanlı baş mimarı ve inşaat mühendisi Mimar Sinan kaç yılında doğmuştur?",
+        "answer": "1489"
+    },
+    {
+        "category": "general",
+        "question": "Büyük Çin bilgesi, filozof, siyasal yönetici olan Konfüçyüs milattan önce kaç yılında doğmuştur?",
+        "answer": "551"
+    },
+    {
+        "category": "general",
+        "question": "Alman filozof, politik ekonomist ve devrimci Karl Marx kaç yılında doğmuştur?",
+        "answer": "1818"
+    },
+    {
+        "category": "general",
+        "question": "Ünlü Fransız yazar ve düşünür, felsefi içerikli romanların yazarı Jean-Paul Sartre kaç yılında doğmuştur?",
+        "answer": "1905"
+    },
+    {
+        "category": "general",
+        "question": "Fenerbahçe Futbol Takımı kaç yılında kurulmuştur?",
+        "answer": "1907"
+    },
+    {
+        "category": "general",
+        "question": "Galatasaray Futbol Takımı kaç yılında kurulmuştur?",
+        "answer": "1905"
+    },
+    {
+        "category": "general",
+        "question": "Beşiktaş Jimnastik Kulübü kaç yılında kurulmuştur?",
+        "answer": "1903"
+    },
+    {
+        "category": "general",
+        "question": "Beşiktaş Jimnastik Kulübü kaç yılında kurulmuştur?",
+        "answer": "1903"
+    },
+    {
+        "category": "general",
+        "question": "İlk Hastane Hristiyanların buluşu olup kaç yılında yapılmıştır?",
+        "answer": "368"
+    },
+    {
+        "category": "general",
+        "question": "Çinde eskiden beri bilinip, Avrupaya daha sonra gelen ilk pusula hangi yıl gelmiştir?",
+        "answer": "1190"
+    },
+    {
+        "category": "general",
+        "question": "Gözlük daha doğrusu yakını gösteren mercek kaç yılında bulunmuştur?",
+        "answer": "1316"
+    },
+    {
+        "category": "general",
+        "question": "Kakao Amerikada bulunanlar dışında ne zaman keşfedilmiştir?",
+        "answer": "1492"
+    },
+    {
+        "category": "general",
+        "question": "Teleskop kaç yılında icat edilmiştir?",
+        "answer": "1608"
+    },
+    {
+        "category": "general",
+        "question": "Hollandalı Huyghens cep saatini kaç yılında bulmuştur?",
+        "answer": "1670"
+    },
+    {
+        "category": "general",
+        "question": "Buhar gücünden yararlanılıp ilk faydalı uygulama hangi yıl yapılmıştır?",
+        "answer": "1712"
+    },
+    {
+        "category": "general",
+        "question": "Ağaç oyma tekniği kullanılarak yapılan ilk matbaa hangi yıl üretilmiştir?",
+        "answer": "593"
+    },
+    {
+        "category": "general",
+        "question": "İlk yolcuları bir horoz, bir koyun ve bir ördek olan uçan balon hangi yıl yapılmıştır?",
+        "answer": "1783"
+    },
+    {
+        "category": "general",
+        "question": "İlk haber toplama ve dağıtma gazetesi olan Acta Diurna milattan önce kaç yılında basılmıştır?",
+        "answer": "59"
+    },
+    {
+        "category": "general",
+        "question": "İlk haber toplama ve dağıtma gazetesi olan Acta Diurna milattan önce kaç yılında basılmıştır?",
+        "answer": "59"
+    },
+    {
+        "category": "general",
+        "question": "Londra'da yayın hayatına başlamış olan The Times gazetesinin ilk basımı hangi yıl yapılmıştır?",
+        "answer": "1788"
+    },
+    {
+        "category": "general",
+        "question": "Everest Dağı'na ilk tırmanan iki dağcı bu olayı hangi yıl gerçekleştirmiştir?",
+        "answer": "1953"
+    },
+    {
+        "category": "general",
+        "question": "Ay'a ilk yapay uydu hangi yıl fırlatılmıştır?",
+        "answer": "1957"
+    },
+    {
+        "category": "general",
+        "question": "Ay'a ilk ayak basan insan, Neil Armstrong bu ünvanı hangi yıl almıştır?",
+        "answer": "1969"
+    },
+    {
+        "category": "general",
+        "question": "Telefon hangi yıl icat edilmiştir?",
+        "answer": "1876"
+    },
+    {
+        "category": "general",
+        "question": "İlk mekanik bilgisayar hangi yıl icat edilmiştir?",
+        "answer": "1822"
+    },
+    {
+        "category": "general",
+        "question": "Bilgisayar ve bilgisayarlar ile ilgili teorilerin temelini oluşturan Turing Makinesi hangi yıl icat edilmiştir?",
+        "answer": "1936"
+    },
+    {
+        "category": "general",
+        "question": "Gelmiş geçmiş en ünlü ve en etkileyici bestecilerden Ludwig van Beethoven hangi yıl doğmuştur?",
+        "answer": "1770"
+    },
+    {
+        "category": "general",
+        "question": "Türkiye'de ilk nüfus sayımı kaç yılında yapılmıştır?",
+        "answer": "1927"
+    }
+]

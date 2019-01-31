@@ -1,0 +1,342 @@
+[
+    {
+        "category": "geo",
+        "question": "Dünyanın en uzun nehirlerinden biri olan Nil Nehri kaç kilometre uzunluğundadır?",
+        "answer": "6853"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın en yüksek dağı olan Everest Dağı kaç metre yüksekliktedir?",
+        "answer": "8848"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın en soğuk bölgesi olan Antartika'da ölçülen en düşük sıcaklık - kaç derecedir? ",
+        "answer": "93"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın en kalabalık şehri olarak bilinen Çinin nüfusu kaçtır?",
+        "answer": "1386000000"
+    },
+    {
+        "category": "geo",
+        "question": "Çin Halk Cumhuriyetinin kaç ülke ile sınırı bulunmaktadır?",
+        "answer": "15"
+    },
+    {
+        "category": "geo",
+        "question": "Almanya - Türkiye arası karayolu kaç kilometredir?",
+        "answer": "3002"
+    },
+    {
+        "category": "geo",
+        "question": "Meksika - Türkiye arası ortalama bir uçak ile kaç saattir?",
+        "answer": "17"
+    },
+    {
+        "category": "geo",
+        "question": "Türkiye'nin en doğusundan, batısına iki ucu arası kaç kilometredir?",
+        "answer": "1565"
+    },
+    {
+        "category": "geo",
+        "question": "Dünya'nın yüzde kaçı Su'dan oluşur?",
+        "answer": "71"
+    },
+    {
+        "category": "geo",
+        "question": "Mısır'da bulunan Keops Piramidi'nin yüksekliği kaç metredir?",
+        "answer": "139"
+    },
+    {
+        "category": "geo",
+        "question": "Amerika'da bulunan Özgürlük Anıtı'nın yüksekliği kaç metredir?",
+        "answer": "93"
+    },
+    {
+        "category": "geo",
+        "question": "Rio de Janeiro'da bulunan Kurtarıcı İsa heykelinin yüksekliği kaç metredir?",
+        "answer": "38"
+    },
+    {
+        "category": "geo",
+        "question": "Rio de Janeiro'da bulunan Kurtarıcı İsa heykelinin yüksekliği kaç metredir?",
+        "answer": "38"
+    },
+    {
+        "category": "geo",
+        "question": "Hindistan'da bulunan Tac Mahal'in yüksekliği kaç metredir?",
+        "answer": "73"
+    },
+    {
+        "category": "geo",
+        "question": "Dubai'de bulunan Burc Halife gökdeleninin yüksekliği kaç metredir?",
+        "answer": "828"
+    },
+    {
+        "category": "geo",
+        "question": "New York, Amerika'da bulunan Empire State gökdeleninin yüksekliği kaç metredir?",
+        "answer": "381"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyada toplam kaç ülke bulunmaktadır?",
+        "answer": "193"
+    },
+    {
+        "category": "geo",
+        "question": "Kuzey Amerika kıtasında kaç ülke bulunmaktadır?",
+        "answer": "23"
+    },
+    {
+        "category": "geo",
+        "question": "Güney Amerika kıtasında kaç ülke bulunmaktadır?",
+        "answer": "12"
+    },
+    {
+        "category": "geo",
+        "question": "Avrupa kıtasının nüfusu kaç milyon kişi kadardır?",
+        "answer": "730"
+    },
+    {
+        "category": "geo",
+        "question": "Avrupa kıtasında kaç ülke bulunmaktadır?",
+        "answer": "64"
+    },
+    {
+        "category": "geo",
+        "question": "Afrika kıtasında kaç ülke bulunmaktadır?",
+        "answer": "54"
+    },
+    {
+        "category": "geo",
+        "question": "Asya kıtasında kaç ülke bulunmaktadır?",
+        "answer": "48"
+    },
+    {
+        "category": "geo",
+        "question": "Asya kıtasında kaç ülke bulunmaktadır?",
+        "answer": "48"
+    },
+    {
+        "category": "geo",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Türkiye kaçıncı sıradadır?",
+        "answer": "34"
+    },
+    {
+        "category": "geo",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Almanya kaçıncı sıradadır?",
+        "answer": "62"
+    },
+    {
+        "category": "geo",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Birleşik Krallık kaçıncı sıradadır?",
+        "answer": "77"
+    },
+    {
+        "category": "geo",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Çin kaçıncı sıradadır?",
+        "answer": "3"
+    },
+    {
+        "category": "geo",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Rusya kaçıncı sıradadır?",
+        "answer": "1"
+    },
+    {
+        "category": "geo",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda ABD kaçıncı sıradadır?",
+        "answer": "4"
+    },
+    {
+        "category": "geo",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Japonya kaçıncı sıradadır?",
+        "answer": "61"
+    },
+    {
+        "category": "geo",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Mısır kaçıncı sıradadır?",
+        "answer": "29"
+    },
+    {
+        "category": "geo",
+        "question": "Tüm ülkeleri yüzölçümüne göre büyükten küçüğe sıraladığımızda Mısır kaçıncı sıradadır?",
+        "answer": "61"
+    },
+    {
+        "category": "geo",
+        "question": "New York, Amerika'da bulunan Empire State gökdeleninin kaç katı vardır?",
+        "answer": "102"
+    },
+    {
+        "category": "geo",
+        "question": "Dubai'de bulunan Burc Halife gökdeleninin kaç katı vardır?",
+        "answer": "163"
+    },
+    {
+        "category": "geo",
+        "question": "Venezuela'nın balta girmemiş ormanlarından birinde bulunan dünyanın en yüksek şelalesi olan Angel Şelalesi kaç metredir?",
+        "answer": "978"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın en yüksek ikinci dağı olan ve Asya'da bulunan K2 Dağının yüksekliği kaç metredir?",
+        "answer": "8611"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın en derin çukuru olan Mariana Çukurunun derinliği kaç metredir?",
+        "answer": "10994"
+    },
+    {
+        "category": "geo",
+        "question": "Dünya üzerinde Doğu ve Batı olmak üzere toplam kaç meridyen-boylam vardır?",
+        "answer": "360"
+    },
+    {
+        "category": "geo",
+        "question": "Dünya üzerinde Kuzey ve Güney olmak üzere toplam kaç paralel-enlem vardır?",
+        "answer": "180"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın en uzun nehirlerinden biri olan Amazon Nehri kaç kilometre uzunluğundadır?",
+        "answer": "6992"
+    },
+    {
+        "category": "geo",
+        "question": "Türkiye üzerinden kaç tane meridyen geçmektedir?",
+        "answer": "19"
+    },
+    {
+        "category": "geo",
+        "question": "Türkiye'nin doğusundan batısına kaç dakika farkı vardır?",
+        "answer": "76"
+    },
+    {
+        "category": "geo",
+        "question": "Vatikan şehrinin nüfusu kaç kişidir?",
+        "answer": "900"
+    },
+    {
+        "category": "geo",
+        "question": "Maldiv Cumhuriyeti kaç adadan oluşan bir ada ülkesidir?",
+        "answer": "1200"
+    },
+    {
+        "category": "geo",
+        "question": "Türkiye içersinde yaklaşık kaç köy vardır?",
+        "answer": "38000"
+    },
+    {
+        "category": "geo",
+        "question": "Dünya bor rezervinin yüzde kaçı Türkiye'de bulunmaktadır?",
+        "answer": "70"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın yüzölçümü kaç milyon kilometrekaredir?",
+        "answer": "510"
+    },
+    {
+        "category": "geo",
+        "question": "Dünya'nın yüzde kaçı Kara'dan oluşur?",
+        "answer": "29"
+    },
+    {
+        "category": "geo",
+        "question": "Türkiye - İran kara sınırı yaklaşık kaç kilometredir?",
+        "answer": "454"
+    },
+    {
+        "category": "geo",
+        "question": "Türkiye - Irak kara sınırı yaklaşık kaç kilometredir?",
+        "answer": "331"
+    },
+    {
+        "category": "geo",
+        "question": "Türkiye - Suriye kara sınırı yaklaşık kaç kilometredir?",
+        "answer": "877"
+    },
+    {
+        "category": "geo",
+        "question": "Türkiye - Nahçıvan kara sınırı yaklaşık kaç kilometredir?",
+        "answer": "10"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyada deniz seviyesinden en alçakta bulunan Lut Gölü - kaç metre aşağıdadır?",
+        "answer": "395"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın en küçük kıtası olan Okyanusya Kıta'sı kaç milyon kilometre karedir?",
+        "answer": "9"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın en büyük kıtası olan Asya Kıta'sı kaç milyon kilometre karedir?",
+        "answer": "44"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın en büyük okyanusu olan Büyük Okyanus kaç milyon kilometre karedir?",
+        "answer": "180"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın en küçük okyanusu olan Hint Okyanusu kaç milyon kilometre karedir?",
+        "answer": "75"
+    },
+    {
+        "category": "geo",
+        "question": "Dünyanın ortalama sıcaklığı kaç C derecedir?",
+        "answer": "15"
+    },
+    {
+        "category": "geo",
+        "question": "Dünya'da kaydedilen en yüksek sıcaklık kaç C derecedir?",
+        "answer": "58"
+    },
+    {
+        "category": "geo",
+        "question": "Rusya'da bulunan dünyanın en yüksek barajı olan Rugunsky Barajı'nın gövde yüksekliği kaç metredir?",
+        "answer": "325"
+    },
+    {
+        "category": "geo",
+        "question": "Rusya'da bulunan dünyanın en derin gölü olan Baykal Gölü'nün derinliği - kaç metredir?",
+        "answer": "1741"
+    },
+    {
+        "category": "geo",
+        "question": "Ortalama ömrün en uzun olduğu ülkelerden biri olan Japonya'da erkek ömrü ortalama kaç yıldır?",
+        "answer": "77"
+    },
+    {
+        "category": "geo",
+        "question": "Ortalama ömrün en uzun olduğu ülkelerden biri olan Japonya'da kadın ömrü ortalama kaç yıldır?",
+        "answer": "85"
+    },
+    {
+        "category": "geo",
+        "question": "Ortalama ömrün en kısa olduğu ülkelerden biri olan Mozambik'te kadın ömrü ortalama kaç yıldır?",
+        "answer": "36"
+    },
+    {
+        "category": "geo",
+        "question": "Ortalama ömrün en kısa olduğu ülkelerden biri olan Mozambik'te erkek ömrü ortalama kaç yıldır?",
+        "answer": "31"
+    },
+    {
+        "category": "geo",
+        "question": "Papua Yeni Gine'de toplam kaç dil, lehçe ve ağız konuşulmaktadır?",
+        "answer": "869"
+    },
+    {
+        "category": "geo",
+        "question": "Papua Yeni Gine'de toplam kaç dil, lehçe ve ağız konuşulmaktadır?",
+        "answer": "869"
+    }
+]
