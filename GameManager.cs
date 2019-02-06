@@ -1,34 +1,66 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿#pragma warning disable CS0618
+
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-
 public class GameManager : NetworkBehaviour
 {
+	const int TURN_TIME = 15;
+	private void Start()
+	{
+		IpCanvas = GameObject.Find("IPCanvas");
+		Timer = GameObject.Find("Timer");
+		NextQuestionButton = IpCanvas.GetComponentInChildren<Button>();
+		NextQuestionButtonGO = GameObject.Find("NextButton");
+		NextQuestionButtonGO.GetComponent<Canvas>().enabled = false;
+
+		NextQuestionButton.onClick.AddListener(setFlag);
+
+		QuestionText = GameObject.Find("Question");
+		Option_1 = GameObject.Find("Option_1").GetComponent<Button>();
+		Option_2 = GameObject.Find("Option_2").GetComponent<Button>();
+		Option_3 = GameObject.Find("Option_3").GetComponent<Button>();
+		Option_4 = GameObject.Find("Option_4").GetComponent<Button>();
+
+		Option_1.onClick.AddListener(option1Clicked);
+		Option_2.onClick.AddListener(option2Clicked);
+		Option_3.onClick.AddListener(option3Clicked);
+		Option_4.onClick.AddListener(option4Clicked);
+		if (isServer)
+		{
+			getQuestionList();
+		}
+	}
+	
 	public static QuestionList QuestionList = new QuestionList();
+
 	[SyncVar]
 	int rndmQuestionNumber;
+
 	[SyncVar]
 	int rndmOptionNumber;
-	bool flag = true;
-	string checkText = "";
 
 	[SyncVar]
-	float TimeLeft = 10;
+	float TurnTimer = TURN_TIME;
 
-	private float nextActionTime = 0.0f;
-	public float period = 1f;
+	Button NextQuestionButton;
+	GameObject NextQuestionButtonGO;
+	GameObject IpCanvas;
+	GameObject Timer;
 
+	bool RunOnce = true;
+	bool DidIAnswer = false;
 
+	string checkText = "";
+	
 	GameObject QuestionText;
+
 	private Button Option_1;
 	private Button Option_2;
 	private Button Option_3;
 	private Button Option_4;
-
-
 
 	private void getQuestionList()
 	{
@@ -44,114 +76,116 @@ public class GameManager : NetworkBehaviour
 		}
 	}
 
-	private void Start()
-	{
-		QuestionText = GameObject.Find("Question");
-		Option_1 = GameObject.Find("Option_1").GetComponent<Button>();
-		Option_2 = GameObject.Find("Option_2").GetComponent<Button>();
-		Option_3 = GameObject.Find("Option_3").GetComponent<Button>();
-		Option_4 = GameObject.Find("Option_4").GetComponent<Button>();
-		Option_1.onClick.AddListener(option1Clicked);
-		Option_2.onClick.AddListener(option2Clicked);
-		Option_3.onClick.AddListener(option3Clicked);
-		Option_4.onClick.AddListener(option4Clicked);
-		getQuestionList();
-	}
 	private void Update()
 	{
-		if (flag)
+		if (RunOnce)
 		{
 			if (isLocalPlayer)
 			{
 				if (isServer)
 				{
+					//GameObject[] GOS = GameObject.FindGameObjectsWithTag("Player");
+					//foreach (GameObject Player in GOS)
+					//{
+					//	Debug.Log("Buldum..");
+					//}
+					TurnTimer = TURN_TIME;
 					rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
 					rndmOptionNumber = Random.Range(1, 5);
 
-					StartCoroutine(setQuestionTimer(rndmQuestionNumber));
+					StartCoroutine(setQuestionCT(rndmQuestionNumber));
 				}
-
 			}
 
-			flag = false;
+			RunOnce = false;
+
 		}
+
 		if (isServer)
 		{
-			if (Time.time > nextActionTime)
+			TurnTimer -= Time.deltaTime;
+			RpcSetTurnTimer(TurnTimer);
+
+			if (TurnTimer <= 0)
 			{
-				nextActionTime += period;
-				TimeLeft--;
-				Debug.Log(TimeLeft);
-				if (TimeLeft == 0)
+				//Debug.Log("TUR BİTTİ");	
+				TurnTimer = 0;
+				checkAnswer("");
+				NextQuestionButtonGO.GetComponent<Canvas>().enabled = true;
+			}
+
+			if (IpCanvas.GetComponent<Canvas>().enabled == true)
+			{
+				//TODO: Diger oyuncuların cevaplarını kontrol et eger hepsi cevaplamıssa timer baslat
+				if (DidIAnswer)
 				{
-					TimeLeft = 10;
+					NextQuestionButtonGO.GetComponent<Canvas>().enabled = true;
 				}
 			}
-		}
-	}
-
-	void option1Clicked()
-	{
-		checkText = Option_1.GetComponentInChildren<Text>().text;
-		checkAnswer(checkText);
-	}
-	void option2Clicked()
-	{
-		checkText = Option_2.GetComponentInChildren<Text>().text;
-		checkAnswer(checkText);
-	}
-	void option3Clicked()
-	{
-		checkText = Option_3.GetComponentInChildren<Text>().text;
-		checkAnswer(checkText);
-	}
-	void option4Clicked()
-	{
-		checkText = Option_4.GetComponentInChildren<Text>().text;
-		checkAnswer(checkText);
-	}
-	void checkAnswer(string text)
-	{
-		if (isLocalPlayer)
-		{
-
-		}		
-		string answer = text;
-		//Debug.Log(text);
-		//Debug.Log(QuestionList.Question[rndmQuestionNumber].answer.ToString());
-
-		if (QuestionList.Question[rndmQuestionNumber].answer.ToString() == text)
-		{
-			Debug.Log("Doğru Cevap");
-			StartCoroutine(setUpNextQuestion());			
 		}
 		else
 		{
-			Debug.Log("Yanlış Cevap");
+			if (TurnTimer <= 0)
+			{
+				//Debug.Log("TUR BİTTİ");	
+				TurnTimer = 0;
+				checkAnswer("");		
+			}
+
+			if (IpCanvas.GetComponent<Canvas>().enabled == true)
+			{
+				//TODO: Diger oyuncuların cevaplarını kontrol et eger hepsi cevaplamıssa timer baslat
+				if (DidIAnswer)
+				{
+
+				}
+			}
 		}
+
 	}
 
-	IEnumerator setUpNextQuestion()
+	IEnumerator setQuestionCT(int rndm)
 	{
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(1);
+
+		RpcsetQuestion(rndm);
+
+	}
+
+	IEnumerator setUpNextQuestionCT()
+	{
+		yield return new WaitForSeconds(5);
+
 		if (isServer)
 		{
-			flag = true;
+			RunOnce = true;
 		}
-	}
-
-	IEnumerator setQuestionTimer(int rndm)
-	{
-		yield return new WaitForSeconds(2);
-		RpcsetQuestion(rndm);
 	}
 
 	[ClientRpc]
 	private void RpcsetQuestion(int number)
 	{
+		//TODO: Bir sekilde client ve server icin soru olusturulurken cevaplar eşleşmiyor. Düzelt
+		DidIAnswer = false;
+		IpCanvas.GetComponent<Canvas>().enabled = false;
+		NextQuestionButtonGO.GetComponent<Canvas>().enabled = false;
+
 		QuestionText.GetComponentInChildren<Text>().text = QuestionList.Question[number].question;
+		Debug.Log("Sorunun Cevabı: " + QuestionList.Question[rndmQuestionNumber].answer.ToString());
 		GameObject.Find("Option_" + rndmOptionNumber).GetComponentInChildren<Text>().text = QuestionList.Question[rndmQuestionNumber].answer.ToString();
 		generateOtherOptions();
+	}
+
+	[ClientRpc]
+	private void RpcSetTurnTimer(float x)
+	{
+		Timer.GetComponent<Text>().text = x.ToString("0");
+	}
+
+	void setFlag()
+	{
+		RunOnce = true;
+		TurnTimer = 15;
 	}
 
 	void generateOtherOptions()
@@ -189,6 +223,7 @@ public class GameManager : NetworkBehaviour
 			generateOptionsTexts(min, max);
 		}
 	}
+
 	void generateOptionsTexts(int min, int max)
 	{
 		if (rndmOptionNumber == 1)
@@ -207,8 +242,8 @@ public class GameManager : NetworkBehaviour
 		{
 			generateText(4, min, max);
 		}
-
 	}
+
 	void generateText(int index, int min, int max)
 	{
 		int rndmEven = Random.Range(1, 10);
@@ -237,6 +272,51 @@ public class GameManager : NetworkBehaviour
 				{
 					GameObject.Find("Option_" + i).GetComponentInChildren<Text>().text = (QuestionList.Question[rndmQuestionNumber].answer - rndm).ToString();
 				}
+			}
+		}
+
+
+	}
+
+	public void option1Clicked()
+	{
+		checkText = Option_1.GetComponentInChildren<Text>().text;
+		checkAnswer(checkText);
+	}
+	public void option2Clicked()
+	{
+		checkText = Option_2.GetComponentInChildren<Text>().text;
+		checkAnswer(checkText);
+	}
+	public void option3Clicked()
+	{
+		checkText = Option_3.GetComponentInChildren<Text>().text;
+		checkAnswer(checkText);
+	}
+	public void option4Clicked()
+	{
+		checkText = Option_4.GetComponentInChildren<Text>().text;
+		checkAnswer(checkText);
+	}
+
+	void checkAnswer(string text)
+	{
+		DidIAnswer = true;
+		string answer = text;
+
+		if (isLocalPlayer)
+		{
+			IpCanvas.GetComponent<Canvas>().enabled = true;
+
+			if (QuestionList.Question[rndmQuestionNumber].answer.ToString() == text)
+			{
+				IpCanvas.GetComponentInChildren<Text>().text = "Doğru Cevap";
+				Debug.Log("Doğru Cevap");
+			}
+			else
+			{
+				IpCanvas.GetComponentInChildren<Text>().text = "Yanlış Cevap";
+				Debug.Log("Yanlış Cevap");
 			}
 
 		}
