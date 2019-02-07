@@ -33,7 +33,7 @@ public class GameManager : NetworkBehaviour
 			getQuestionList();
 		}
 	}
-	
+
 	public static QuestionList QuestionList = new QuestionList();
 
 	[SyncVar]
@@ -45,6 +45,8 @@ public class GameManager : NetworkBehaviour
 	[SyncVar]
 	float TurnTimer = TURN_TIME;
 
+	float StopTimer = 0;
+
 	Button NextQuestionButton;
 	GameObject NextQuestionButtonGO;
 	GameObject IpCanvas;
@@ -54,7 +56,7 @@ public class GameManager : NetworkBehaviour
 	bool DidIAnswer = false;
 
 	string checkText = "";
-	
+
 	GameObject QuestionText;
 
 	private Button Option_1;
@@ -78,31 +80,34 @@ public class GameManager : NetworkBehaviour
 
 	private void Update()
 	{
-		if (RunOnce)
-		{
-			if (isLocalPlayer)
-			{
-				if (isServer)
-				{
-					//GameObject[] GOS = GameObject.FindGameObjectsWithTag("Player");
-					//foreach (GameObject Player in GOS)
-					//{
-					//	Debug.Log("Buldum..");
-					//}
-					TurnTimer = TURN_TIME;
-					rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
-					rndmOptionNumber = Random.Range(1, 5);
-
-					StartCoroutine(setQuestionCT(rndmQuestionNumber));
-				}
-			}
-
-			RunOnce = false;
-
-		}
-
 		if (isServer)
 		{
+			//Debug.Log("BEN SUNUCUYUM");
+			if (isLocalPlayer)
+			{
+				//Debug.Log("BEN LOCALPLAYERIM");
+				if (hasAuthority)
+				{
+					//Debug.Log("AUTHORİTY BANA AİT");
+					if (RunOnce)
+					{
+						TurnTimer = TURN_TIME;
+						rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
+						rndmOptionNumber = Random.Range(1, 5);
+						StartCoroutine(setQuestionCT(rndmQuestionNumber, rndmOptionNumber));
+						RunOnce = false;
+					}
+				}
+				else
+				{
+					return;
+				}
+			}
+			else
+			{
+				return;
+			}
+
 			TurnTimer -= Time.deltaTime;
 			RpcSetTurnTimer(TurnTimer);
 
@@ -110,7 +115,10 @@ public class GameManager : NetworkBehaviour
 			{
 				//Debug.Log("TUR BİTTİ");	
 				TurnTimer = 0;
-				checkAnswer("");
+				if (hasAuthority)
+				{
+					checkAnswer("");
+				}
 				NextQuestionButtonGO.GetComponent<Canvas>().enabled = true;
 			}
 
@@ -129,7 +137,10 @@ public class GameManager : NetworkBehaviour
 			{
 				//Debug.Log("TUR BİTTİ");	
 				TurnTimer = 0;
-				checkAnswer("");		
+				if (hasAuthority)
+				{
+					checkAnswer("");
+				}
 			}
 
 			if (IpCanvas.GetComponent<Canvas>().enabled == true)
@@ -144,12 +155,11 @@ public class GameManager : NetworkBehaviour
 
 	}
 
-	IEnumerator setQuestionCT(int rndm)
+	IEnumerator setQuestionCT(int question, int option)
 	{
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.5f);
 
-		RpcsetQuestion(rndm);
-
+		RpcsetQuestion(question, option);
 	}
 
 	IEnumerator setUpNextQuestionCT()
@@ -163,16 +173,17 @@ public class GameManager : NetworkBehaviour
 	}
 
 	[ClientRpc]
-	private void RpcsetQuestion(int number)
+	private void RpcsetQuestion(int question, int option)
 	{
 		//TODO: Bir sekilde client ve server icin soru olusturulurken cevaplar eşleşmiyor. Düzelt
 		DidIAnswer = false;
 		IpCanvas.GetComponent<Canvas>().enabled = false;
 		NextQuestionButtonGO.GetComponent<Canvas>().enabled = false;
 
-		QuestionText.GetComponentInChildren<Text>().text = QuestionList.Question[number].question;
-		Debug.Log("Sorunun Cevabı: " + QuestionList.Question[rndmQuestionNumber].answer.ToString());
-		GameObject.Find("Option_" + rndmOptionNumber).GetComponentInChildren<Text>().text = QuestionList.Question[rndmQuestionNumber].answer.ToString();
+		QuestionText.GetComponentInChildren<Text>().text = QuestionList.Question[question].question;
+		Debug.Log("Sorunun Cevabı: " + QuestionList.Question[question].answer.ToString());
+
+		GameObject.Find("Option_" + option).GetComponentInChildren<Text>().text = QuestionList.Question[question].answer.ToString();
 		generateOtherOptions();
 	}
 
@@ -184,6 +195,7 @@ public class GameManager : NetworkBehaviour
 
 	void setFlag()
 	{
+		NextQuestionButtonGO.GetComponent<Canvas>().enabled = false;
 		RunOnce = true;
 		TurnTimer = 15;
 	}
@@ -280,23 +292,39 @@ public class GameManager : NetworkBehaviour
 
 	public void option1Clicked()
 	{
-		checkText = Option_1.GetComponentInChildren<Text>().text;
-		checkAnswer(checkText);
+		if (hasAuthority)
+		{
+			if (isServer || isClient)
+			{
+
+			}
+			checkText = Option_1.GetComponentInChildren<Text>().text;
+			checkAnswer(checkText);
+		}
 	}
 	public void option2Clicked()
 	{
-		checkText = Option_2.GetComponentInChildren<Text>().text;
-		checkAnswer(checkText);
+		if (hasAuthority)
+		{
+			checkText = Option_2.GetComponentInChildren<Text>().text;
+			checkAnswer(checkText);
+		}
 	}
 	public void option3Clicked()
 	{
-		checkText = Option_3.GetComponentInChildren<Text>().text;
-		checkAnswer(checkText);
+		if (hasAuthority)
+		{
+			checkText = Option_3.GetComponentInChildren<Text>().text;
+			checkAnswer(checkText);
+		}
 	}
 	public void option4Clicked()
 	{
-		checkText = Option_4.GetComponentInChildren<Text>().text;
-		checkAnswer(checkText);
+		if (hasAuthority)
+		{
+			checkText = Option_4.GetComponentInChildren<Text>().text;
+			checkAnswer(checkText);
+		}
 	}
 
 	void checkAnswer(string text)
