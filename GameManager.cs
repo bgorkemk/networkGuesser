@@ -7,8 +7,35 @@ using UnityEngine.UI;
 
 public class GameManager : NetworkBehaviour
 {
-	const int TURN_TIME = 30;
+	//VARIABLES
+	const int TURN_TIME = 10;
 
+	public static QuestionList QuestionList = new QuestionList();
+
+	[SyncVar]
+	int rndmQuestionNumber;
+	[SyncVar]
+	int rndmOptionNumber;
+	[SyncVar]
+	float TurnTimer = TURN_TIME;
+
+	Button NextQuestionButton;
+	GameObject NextQuestionButtonGO;
+	GameObject IpCanvas;
+	GameObject Timer;
+	GameObject QuestionText;
+	Button Option_1;
+	Button Option_2;
+	Button Option_3;
+	Button Option_4;
+
+	bool RunOnce = true;
+	bool DidIAnswer = false;
+	public bool CanvasShow = false;
+	public bool ButtonShow = false;
+	string checkText = "";
+
+	// FUNCTIONS
 	private void Start()
 	{
 		IpCanvas = GameObject.Find("IPCanvas");
@@ -17,7 +44,7 @@ public class GameManager : NetworkBehaviour
 		NextQuestionButton = IpCanvas.GetComponentInChildren<Button>();
 		NextQuestionButton.onClick.AddListener(startNextTurn);
 		NextQuestionButtonGO = GameObject.Find("NextButton");
-		
+
 		QuestionText = GameObject.Find("Question");
 		Option_1 = GameObject.Find("Option_1").GetComponent<Button>();
 		Option_2 = GameObject.Find("Option_2").GetComponent<Button>();
@@ -28,10 +55,9 @@ public class GameManager : NetworkBehaviour
 		Option_2.onClick.AddListener(option2Clicked);
 		Option_3.onClick.AddListener(option3Clicked);
 		Option_4.onClick.AddListener(option4Clicked);
-		if (isServer)
-		{
-			getQuestionList();
-		}
+
+		getQuestionList();
+
 	}
 	private void CanvasEnabled(bool ISIT)
 	{
@@ -61,38 +87,6 @@ public class GameManager : NetworkBehaviour
 
 		ButtonShow = ISIT;
 	}
-
-	public static QuestionList QuestionList = new QuestionList();	
-
-	[SyncVar]
-	int rndmQuestionNumber;
-
-	[SyncVar]
-	int rndmOptionNumber;
-
-	[SyncVar]
-	float TurnTimer = TURN_TIME;
-
-	float StopTimer = 0;
-
-	Button NextQuestionButton;
-	GameObject NextQuestionButtonGO;
-	GameObject IpCanvas;
-	GameObject Timer;
-
-	bool RunOnce = true;
-	bool DidIAnswer = false;
-	public bool CanvasShow = false;
-	public bool ButtonShow = false;
-	string checkText = "";
-
-	GameObject QuestionText;
-
-	private Button Option_1;
-	private Button Option_2;
-	private Button Option_3;
-	private Button Option_4;
-
 	private void getQuestionList()
 	{
 		//JSON Datayı ceken fonksiyon
@@ -110,31 +104,34 @@ public class GameManager : NetworkBehaviour
 
 	private void Update()
 	{
+		Debug.Log("BEN NEYİM ?");
+
+		ServerUpdate();
+		ClientUpdate();
+	}
+	// TODO: MUHTEMELEN SERVERDA AYARLAN SORULAR SYNC OLMUYOR 
+	void ServerUpdate()
+	{
+		// Bu fonksiyon sadece Serverda calısır. Server Ve Clientsa'da calısır.
 		if (isServer)
 		{
-			if (isLocalPlayer)
-			{
-				if (hasAuthority)
-				{
-					if (RunOnce)
-					{
-						Debug.Log("SERVER, LOCALPLAYER, HASAUTHORITY");
-						TurnTimer = TURN_TIME;
-						rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
-						rndmOptionNumber = Random.Range(1, 5);
-						StartCoroutine(setQuestionCT(rndmQuestionNumber, rndmOptionNumber));
-						RunOnce = false;
-					}
-				}
-				else
-				{
-					return;
-				}
-			}
-			else
+			if (isLocalPlayer == false)
 			{
 				return;
 			}
+			if (hasAuthority == false)
+			{
+				return;
+			}
+			if (RunOnce)
+			{
+				TurnTimer = TURN_TIME;
+				rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
+				rndmOptionNumber = Random.Range(1, 5);
+				StartCoroutine(setQuestionCT(rndmQuestionNumber, rndmOptionNumber));
+				RunOnce = false;
+			}
+
 
 			TurnTimer -= Time.deltaTime;
 			RpcSetTurnTimer(TurnTimer);
@@ -143,11 +140,9 @@ public class GameManager : NetworkBehaviour
 			{
 				//Debug.Log("TUR BİTTİ");	
 				TurnTimer = 0;
-				if (hasAuthority)
-				{
-					checkAnswer("");
-				}				
-				ButtonEnabled(true);
+
+				checkAnswer("");
+
 			}
 
 			if (CanvasShow)
@@ -155,54 +150,48 @@ public class GameManager : NetworkBehaviour
 				//TODO: Diger oyuncuların cevaplarını kontrol et eger hepsi cevaplamıssa timer baslat
 				if (DidIAnswer)
 				{
-				ButtonEnabled(true);					
+					ButtonEnabled(true);
 				}
 			}
-		}
-		else
-		{
-			if (TurnTimer <= 0)
-			{
-				TurnTimer = 0;
-				if (hasAuthority)
-				{
-					checkAnswer("");
-				}
-			}
+			//Debug.Log("Ben Server ve Clientım");
 
-			if (CanvasShow)
-			{
-				//TODO: Sen Clientsın hostu beklemek zorundasın
-				if (DidIAnswer)
-				{
-					
-				}
-			}
-		}
-
+		}	
 	}
+	void ClientUpdate()
+	{
+		//Bu fonksiyon sadece ve sadece Clientlarda calısır, Eğer Client ve Serve ise dahi calısmaz..
+		if (isServer == true)
+		{
+			return;
+		}
+		if (isLocalPlayer == false)
+		{
+			return;
+		}
+		if (hasAuthority == false)
+		{
+			return;
+		}
+		if (TurnTimer <= 0)
+		{
+			//Debug.Log("TUR BİTTİ");	
+			TurnTimer = 0;
 
-	
+			checkAnswer("");
+
+		}
+		//Debug.Log("Ben Clientım");
+	}
 
 	IEnumerator setQuestionCT(int question, int option)
 	{
 		yield return new WaitForSeconds(0.5f);
 
-		RpcsetQuestion(question, option);
-	}
-
-	IEnumerator setUpNextQuestionCT()
-	{
-		yield return new WaitForSeconds(5);
-
-		if (isServer)
-		{
-			RunOnce = true;
-		}
+		RpcSetQuestion(question, option);
 	}
 
 	[ClientRpc]
-	private void RpcsetQuestion(int question, int option)
+	private void RpcSetQuestion(int question, int option)
 	{
 		//TODO: Bir sekilde client ve server icin soru olusturulurken cevaplar eşleşmiyor. Eşleşiyo olabilir ama buttonların icindeki textleri almıyor!!
 		DidIAnswer = false;
@@ -216,7 +205,6 @@ public class GameManager : NetworkBehaviour
 		GameObject.Find("Option_" + option).GetComponentInChildren<Text>().text = QuestionList.Question[question].answer.ToString();
 		generateOtherOptions();
 	}
-
 	[ClientRpc]
 	private void RpcSetTurnTimer(float x)
 	{
@@ -228,9 +216,8 @@ public class GameManager : NetworkBehaviour
 	{
 		ButtonEnabled(false);
 		RunOnce = true;
-		TurnTimer = 15;
+		TurnTimer = TURN_TIME;
 	}
-
 	void generateOtherOptions()
 	{
 		// Bu fonksiyon secilen sorunun cevabını alıp eger cevap belli aralıklardan büyükse 
@@ -315,11 +302,10 @@ public class GameManager : NetworkBehaviour
 
 
 	}
-
 	public void option1Clicked()
 	{
 		if (hasAuthority)
-		{			
+		{
 			checkText = Option_1.GetComponentInChildren<Text>().text;
 			checkAnswer(checkText);
 		}
@@ -348,27 +334,25 @@ public class GameManager : NetworkBehaviour
 			checkAnswer(checkText);
 		}
 	}
+
+
 	void checkAnswer(string text)
 	{
 		DidIAnswer = true;
 		string answer = text;
 
-		if (isLocalPlayer)
+		CanvasEnabled(true);
+		ButtonEnabled(true);
+
+		if (QuestionList.Question[rndmQuestionNumber].answer.ToString() == text)
 		{
-			CanvasEnabled(true);
-
-			if (QuestionList.Question[rndmQuestionNumber].answer.ToString() == text)
-			{
-				IpCanvas.GetComponentInChildren<Text>().text = "Doğru Cevap";
-				Debug.Log("Doğru Cevap");
-			}
-			else
-			{
-				IpCanvas.GetComponentInChildren<Text>().text = "Yanlış Cevap";
-				Debug.Log("Yanlış Cevap");
-			}
-
+			IpCanvas.GetComponentInChildren<Text>().text = "Doğru Cevap";
+			Debug.Log("Doğru Cevap");
 		}
-
+		else
+		{
+			IpCanvas.GetComponentInChildren<Text>().text = "Yanlış Cevap";
+			Debug.Log("Yanlış Cevap");
+		}
 	}
 }
