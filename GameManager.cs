@@ -7,17 +7,17 @@ using UnityEngine.UI;
 
 public class GameManager : NetworkBehaviour
 {
-	const int TURN_TIME = 15;
+	const int TURN_TIME = 30;
+
 	private void Start()
 	{
 		IpCanvas = GameObject.Find("IPCanvas");
 		Timer = GameObject.Find("Timer");
+
 		NextQuestionButton = IpCanvas.GetComponentInChildren<Button>();
+		NextQuestionButton.onClick.AddListener(startNextTurn);
 		NextQuestionButtonGO = GameObject.Find("NextButton");
-		NextQuestionButtonGO.GetComponent<Canvas>().enabled = false;
-
-		NextQuestionButton.onClick.AddListener(setFlag);
-
+		
 		QuestionText = GameObject.Find("Question");
 		Option_1 = GameObject.Find("Option_1").GetComponent<Button>();
 		Option_2 = GameObject.Find("Option_2").GetComponent<Button>();
@@ -33,8 +33,36 @@ public class GameManager : NetworkBehaviour
 			getQuestionList();
 		}
 	}
+	private void CanvasEnabled(bool ISIT)
+	{
+		// Bu Arayüz Canvasının kontrol(show/hide) fonksiyonu!
+		if (ISIT)
+		{
+			IpCanvas.GetComponent<Canvas>().enabled = ISIT;
+		}
+		else
+		{
+			IpCanvas.GetComponent<Canvas>().enabled = ISIT;
+		}
 
-	public static QuestionList QuestionList = new QuestionList();
+		CanvasShow = ISIT;
+	}
+	private void ButtonEnabled(bool ISIT)
+	{
+		// Bu Arayüz Canvasındaki BUTTONun kontrol(show/hide) fonksiyonu!
+		if (ISIT)
+		{
+			NextQuestionButtonGO.GetComponent<Canvas>().enabled = ISIT;
+		}
+		else
+		{
+			NextQuestionButtonGO.GetComponent<Canvas>().enabled = ISIT;
+		}
+
+		ButtonShow = ISIT;
+	}
+
+	public static QuestionList QuestionList = new QuestionList();	
 
 	[SyncVar]
 	int rndmQuestionNumber;
@@ -54,7 +82,8 @@ public class GameManager : NetworkBehaviour
 
 	bool RunOnce = true;
 	bool DidIAnswer = false;
-
+	public bool CanvasShow = false;
+	public bool ButtonShow = false;
 	string checkText = "";
 
 	GameObject QuestionText;
@@ -66,6 +95,7 @@ public class GameManager : NetworkBehaviour
 
 	private void getQuestionList()
 	{
+		//JSON Datayı ceken fonksiyon
 		TextAsset asset = Resources.Load("history") as TextAsset;
 
 		if (asset != null)
@@ -82,15 +112,13 @@ public class GameManager : NetworkBehaviour
 	{
 		if (isServer)
 		{
-			//Debug.Log("BEN SUNUCUYUM");
 			if (isLocalPlayer)
 			{
-				//Debug.Log("BEN LOCALPLAYERIM");
 				if (hasAuthority)
 				{
-					//Debug.Log("AUTHORİTY BANA AİT");
 					if (RunOnce)
 					{
+						Debug.Log("SERVER, LOCALPLAYER, HASAUTHORITY");
 						TurnTimer = TURN_TIME;
 						rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
 						rndmOptionNumber = Random.Range(1, 5);
@@ -118,16 +146,16 @@ public class GameManager : NetworkBehaviour
 				if (hasAuthority)
 				{
 					checkAnswer("");
-				}
-				NextQuestionButtonGO.GetComponent<Canvas>().enabled = true;
+				}				
+				ButtonEnabled(true);
 			}
 
-			if (IpCanvas.GetComponent<Canvas>().enabled == true)
+			if (CanvasShow)
 			{
 				//TODO: Diger oyuncuların cevaplarını kontrol et eger hepsi cevaplamıssa timer baslat
 				if (DidIAnswer)
 				{
-					NextQuestionButtonGO.GetComponent<Canvas>().enabled = true;
+				ButtonEnabled(true);					
 				}
 			}
 		}
@@ -135,7 +163,6 @@ public class GameManager : NetworkBehaviour
 		{
 			if (TurnTimer <= 0)
 			{
-				//Debug.Log("TUR BİTTİ");	
 				TurnTimer = 0;
 				if (hasAuthority)
 				{
@@ -143,17 +170,19 @@ public class GameManager : NetworkBehaviour
 				}
 			}
 
-			if (IpCanvas.GetComponent<Canvas>().enabled == true)
+			if (CanvasShow)
 			{
-				//TODO: Diger oyuncuların cevaplarını kontrol et eger hepsi cevaplamıssa timer baslat
+				//TODO: Sen Clientsın hostu beklemek zorundasın
 				if (DidIAnswer)
 				{
-
+					
 				}
 			}
 		}
 
 	}
+
+	
 
 	IEnumerator setQuestionCT(int question, int option)
 	{
@@ -175,13 +204,14 @@ public class GameManager : NetworkBehaviour
 	[ClientRpc]
 	private void RpcsetQuestion(int question, int option)
 	{
-		//TODO: Bir sekilde client ve server icin soru olusturulurken cevaplar eşleşmiyor. Düzelt
+		//TODO: Bir sekilde client ve server icin soru olusturulurken cevaplar eşleşmiyor. Eşleşiyo olabilir ama buttonların icindeki textleri almıyor!!
 		DidIAnswer = false;
-		IpCanvas.GetComponent<Canvas>().enabled = false;
-		NextQuestionButtonGO.GetComponent<Canvas>().enabled = false;
+		CanvasEnabled(false);
+		ButtonEnabled(false);
+
 
 		QuestionText.GetComponentInChildren<Text>().text = QuestionList.Question[question].question;
-		Debug.Log("Sorunun Cevabı: " + QuestionList.Question[question].answer.ToString());
+		Debug.Log(question + " Numaralı Sorunun Cevabı: " + QuestionList.Question[question].answer.ToString());
 
 		GameObject.Find("Option_" + option).GetComponentInChildren<Text>().text = QuestionList.Question[question].answer.ToString();
 		generateOtherOptions();
@@ -190,18 +220,21 @@ public class GameManager : NetworkBehaviour
 	[ClientRpc]
 	private void RpcSetTurnTimer(float x)
 	{
+		// TurnTimer zaten update fonksiyonunda server ile azalırken bu her bir clientın bu bilgiyi güncellemesini sağlıyor!
 		Timer.GetComponent<Text>().text = x.ToString("0");
 	}
 
-	void setFlag()
+	void startNextTurn()
 	{
-		NextQuestionButtonGO.GetComponent<Canvas>().enabled = false;
+		ButtonEnabled(false);
 		RunOnce = true;
 		TurnTimer = 15;
 	}
 
 	void generateOtherOptions()
 	{
+		// Bu fonksiyon secilen sorunun cevabını alıp eger cevap belli aralıklardan büyükse 
+		// ona göre MİN MAX olusturup generateOptionsTexts ine MİN MAX değerlerini gönderiyor
 		int min = 0;
 		int max = 0;
 		if (QuestionList.Question[rndmQuestionNumber].answer > 2000)
@@ -235,29 +268,22 @@ public class GameManager : NetworkBehaviour
 			generateOptionsTexts(min, max);
 		}
 	}
-
 	void generateOptionsTexts(int min, int max)
 	{
-		if (rndmOptionNumber == 1)
+		// Bu fonksiyon her bir şık için almış olduğu MİN MAX değerlerini 
+		// o şıkkın Texti oluşturulması için generateText fonksiyonuna gönderiyor.
+		for (int i = 1; i <= 4; i++)
 		{
-			generateText(1, min, max);
-		}
-		else if (rndmOptionNumber == 2)
-		{
-			generateText(2, min, max);
-		}
-		else if (rndmOptionNumber == 3)
-		{
-			generateText(3, min, max);
-		}
-		else if (rndmOptionNumber == 4)
-		{
-			generateText(4, min, max);
+			if (rndmOptionNumber == i)
+			{
+				generateText(i, min, max);
+			}
 		}
 	}
-
 	void generateText(int index, int min, int max)
 	{
+		// Bu fonksiyon dışarıdan gelen doğru cevap şıkkı MİN ve MAX değerini işleyip olusturduğu random sayının
+		// 2ye bölümüne göre çıkartıyor, topluyor ve doğru cevap ise hic ellemiyor bu şekilde 4 şık olusturuyor.
 		int rndmEven = Random.Range(1, 10);
 
 		for (int i = 1; i <= 4; i++)
@@ -293,11 +319,7 @@ public class GameManager : NetworkBehaviour
 	public void option1Clicked()
 	{
 		if (hasAuthority)
-		{
-			if (isServer || isClient)
-			{
-
-			}
+		{			
 			checkText = Option_1.GetComponentInChildren<Text>().text;
 			checkAnswer(checkText);
 		}
@@ -326,7 +348,6 @@ public class GameManager : NetworkBehaviour
 			checkAnswer(checkText);
 		}
 	}
-
 	void checkAnswer(string text)
 	{
 		DidIAnswer = true;
@@ -334,7 +355,7 @@ public class GameManager : NetworkBehaviour
 
 		if (isLocalPlayer)
 		{
-			IpCanvas.GetComponent<Canvas>().enabled = true;
+			CanvasEnabled(true);
 
 			if (QuestionList.Question[rndmQuestionNumber].answer.ToString() == text)
 			{
