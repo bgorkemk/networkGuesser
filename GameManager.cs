@@ -8,16 +8,13 @@ using UnityEngine.UI;
 public class GameManager : NetworkBehaviour
 {
 	//VARIABLES
-	const int TURN_TIME = 10;
+	const int TURN_TIME = 30;
 
 	public static QuestionList QuestionList = new QuestionList();
 
-	[SyncVar]
-	int rndmQuestionNumber;
-	[SyncVar]
-	int rndmOptionNumber;
-	[SyncVar]
-	float TurnTimer = TURN_TIME;
+	[SyncVar] public int rndmQuestionNumber;
+	[SyncVar] public int rndmOptionNumber;
+	[SyncVar] public float TurnTimer;
 
 	Button NextQuestionButton;
 	GameObject NextQuestionButtonGO;
@@ -56,8 +53,9 @@ public class GameManager : NetworkBehaviour
 		Option_3.onClick.AddListener(option3Clicked);
 		Option_4.onClick.AddListener(option4Clicked);
 
+		CanvasEnabled(false);
+		ButtonEnabled(false);
 		getQuestionList();
-
 	}
 	private void CanvasEnabled(bool ISIT)
 	{
@@ -101,50 +99,45 @@ public class GameManager : NetworkBehaviour
 			Debug.Log("Assets are null!");
 		}
 	}
+	private void setQuestionAndOption()
+	{
+		// Bu fonksiyon rastgele 1 soru ve 1 secenek seciyor.
+		rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
+		rndmOptionNumber = Random.Range(1, 5);
+	}
 
 	private void Update()
 	{
-		Debug.Log("BEN NEYİM ?");
-
 		ServerUpdate();
 		ClientUpdate();
 	}
-	// TODO: MUHTEMELEN SERVERDA AYARLAN SORULAR SYNC OLMUYOR 
+	// TODO: MUHTEMELEN SERVERDA AYARLANAN SORULAR SYNC OLMUYOR
+	// TODO: rndmQuestionNumber ve rndmOptionNumber sync olmuyor bir yolunu bul. !!!
 	void ServerUpdate()
 	{
-		// Bu fonksiyon sadece Serverda calısır. Server Ve Clientsa'da calısır.
-		if (isServer)
+		// Bu fonksiyon sadece Serverda calısır. Server aynı zamanda Clientsa'da calısır.
+		if (isServer == false)
 		{
-			if (isLocalPlayer == false)
-			{
-				return;
-			}
-			if (hasAuthority == false)
-			{
-				return;
-			}
+			return;
+		}	
+		if (isServer)
+		{			
+			TurnTimer -= Time.deltaTime;
+			Timer.GetComponent<Text>().text = TurnTimer.ToString("0");
 			if (RunOnce)
 			{
 				TurnTimer = TURN_TIME;
-				rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
-				rndmOptionNumber = Random.Range(1, 5);
-				StartCoroutine(setQuestionCT(rndmQuestionNumber, rndmOptionNumber));
+				setQuestionAndOption();
+				StartCoroutine(RpcSetQuestionIE(rndmQuestionNumber, rndmOptionNumber));
 				RunOnce = false;
 			}
-
-
-			TurnTimer -= Time.deltaTime;
-			RpcSetTurnTimer(TurnTimer);
-
 			if (TurnTimer <= 0)
 			{
-				//Debug.Log("TUR BİTTİ");	
 				TurnTimer = 0;
-
+				//Debug.Log("TUR BİTTİ");					
 				checkAnswer("");
 
 			}
-
 			if (CanvasShow)
 			{
 				//TODO: Diger oyuncuların cevaplarını kontrol et eger hepsi cevaplamıssa timer baslat
@@ -155,38 +148,28 @@ public class GameManager : NetworkBehaviour
 			}
 			//Debug.Log("Ben Server ve Clientım");
 
-		}	
+		}
 	}
 	void ClientUpdate()
 	{
-		//Bu fonksiyon sadece ve sadece Clientlarda calısır, Eğer Client ve Serve ise dahi calısmaz..
+		//Bu fonksiyon sadece ve sadece Clientlarda calısır, Eğer Client ve Server ise calısmaz..
 		if (isServer == true)
 		{
 			return;
 		}
-		if (isLocalPlayer == false)
-		{
-			return;
-		}
-		if (hasAuthority == false)
-		{
-			return;
-		}
+		Timer.GetComponent<Text>().text = TurnTimer.ToString("0");
+
 		if (TurnTimer <= 0)
 		{
-			//Debug.Log("TUR BİTTİ");	
 			TurnTimer = 0;
-
 			checkAnswer("");
-
 		}
 		//Debug.Log("Ben Clientım");
 	}
 
-	IEnumerator setQuestionCT(int question, int option)
+	IEnumerator RpcSetQuestionIE(int question, int option)
 	{
-		yield return new WaitForSeconds(0.5f);
-
+		yield return new WaitForSeconds(0.0f);
 		RpcSetQuestion(question, option);
 	}
 
@@ -198,18 +181,10 @@ public class GameManager : NetworkBehaviour
 		CanvasEnabled(false);
 		ButtonEnabled(false);
 
-
 		QuestionText.GetComponentInChildren<Text>().text = QuestionList.Question[question].question;
-		Debug.Log(question + " Numaralı Sorunun Cevabı: " + QuestionList.Question[question].answer.ToString());
 
 		GameObject.Find("Option_" + option).GetComponentInChildren<Text>().text = QuestionList.Question[question].answer.ToString();
 		generateOtherOptions();
-	}
-	[ClientRpc]
-	private void RpcSetTurnTimer(float x)
-	{
-		// TurnTimer zaten update fonksiyonunda server ile azalırken bu her bir clientın bu bilgiyi güncellemesini sağlıyor!
-		Timer.GetComponent<Text>().text = x.ToString("0");
 	}
 
 	void startNextTurn()
@@ -344,15 +319,15 @@ public class GameManager : NetworkBehaviour
 		CanvasEnabled(true);
 		ButtonEnabled(true);
 
-		if (QuestionList.Question[rndmQuestionNumber].answer.ToString() == text)
+		if (QuestionList.Question[rndmQuestionNumber].answer.ToString() == answer)
 		{
 			IpCanvas.GetComponentInChildren<Text>().text = "Doğru Cevap";
-			Debug.Log("Doğru Cevap");
+			//Debug.Log("Doğru Cevap");
 		}
 		else
 		{
 			IpCanvas.GetComponentInChildren<Text>().text = "Yanlış Cevap";
-			Debug.Log("Yanlış Cevap");
+			//Debug.Log("Yanlış Cevap");
 		}
 	}
 }
