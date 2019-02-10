@@ -16,6 +16,9 @@ public class GameManager : NetworkBehaviour
 	[SyncVar] public int rndmOptionNumber;
 	[SyncVar] public float TurnTimer;
 
+	[SyncVar] public int syncIT_1;
+	[SyncVar] public int syncIT_2;
+
 	Button NextQuestionButton;
 	GameObject NextQuestionButtonGO;
 	GameObject IpCanvas;
@@ -87,6 +90,8 @@ public class GameManager : NetworkBehaviour
 	}
 	private void getQuestionList()
 	{
+		CanvasEnabled(false);
+		ButtonEnabled(false);
 		//JSON Datayı ceken fonksiyon
 		TextAsset asset = Resources.Load("history") as TextAsset;
 
@@ -102,8 +107,10 @@ public class GameManager : NetworkBehaviour
 	private void setQuestionAndOption()
 	{
 		// Bu fonksiyon rastgele 1 soru ve 1 secenek seciyor.
+		// FIXME: BU FONKSİYON 2 DEFA CALISIYOR
 		rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
-		rndmOptionNumber = Random.Range(1, 5);
+		rndmOptionNumber = Random.Range(1, 5);	
+		Debug.Log("SORU SECTİM: " + rndmQuestionNumber + "ŞIK SECTİM: " + rndmOptionNumber);
 	}
 
 	private void Update()
@@ -111,72 +118,111 @@ public class GameManager : NetworkBehaviour
 		ServerUpdate();
 		ClientUpdate();
 	}
-	// TODO: MUHTEMELEN SERVERDA AYARLANAN SORULAR SYNC OLMUYOR
-	// TODO: rndmQuestionNumber ve rndmOptionNumber sync olmuyor bir yolunu bul. !!!
+	// TODO: SYNCVAR SADECE ISSERVER ALTINDA CALISIYOR BUNU DÜZELTMEN GEREK
+
+	void WillItSyncNow()
+	{
+		if (isServer)
+		{
+			syncIT_1 = 300;
+			syncIT_2 = 300;
+		}		
+	}
+	[Command]
+	void CmdSyncPlease()
+	{
+		syncIT_1 = 400;
+		syncIT_2 = 400;
+	}
+	// TODO: rndmQuestionNumber & rndmOptionNumber somehow dont sync fix it. !!!
 	void ServerUpdate()
 	{
 		// Bu fonksiyon sadece Serverda calısır. Server aynı zamanda Clientsa'da calısır.
-		if (isServer == false)
-		{
-			return;
-		}	
 		if (isServer)
-		{			
-			TurnTimer -= Time.deltaTime;
-			Timer.GetComponent<Text>().text = TurnTimer.ToString("0");
-			if (RunOnce)
+		{	
+			syncIT_1 = 100;
+			syncIT_2 = 100;
+			if (hasAuthority)
 			{
-				TurnTimer = TURN_TIME;
-				setQuestionAndOption();
-				StartCoroutine(RpcSetQuestionIE(rndmQuestionNumber, rndmOptionNumber));
-				RunOnce = false;
-			}
-			if (TurnTimer <= 0)
-			{
-				TurnTimer = 0;
-				//Debug.Log("TUR BİTTİ");					
-				checkAnswer("");
-
-			}
-			if (CanvasShow)
-			{
-				//TODO: Diger oyuncuların cevaplarını kontrol et eger hepsi cevaplamıssa timer baslat
-				if (DidIAnswer)
+				syncIT_1 = 200;
+				syncIT_2 = 200;
+				if (isLocalPlayer == true)
 				{
-					ButtonEnabled(true);
+					WillItSyncNow();
+					CmdSyncPlease();
+					TurnTimer -= Time.deltaTime;
+					Timer.GetComponent<Text>().text = TurnTimer.ToString("0");
+					if (RunOnce)
+					{
+						TurnTimer = TURN_TIME;
+						StartCoroutine(RpcSetQuestionIE());
+						RunOnce = false;
+					}
+
+					if (TurnTimer <= 0)
+					{
+						TurnTimer = 0;
+						//Debug.Log("TUR BİTTİ");					
+						checkAnswer("");
+
+					}
+					if (CanvasShow)
+					{
+						//TODO: Diger oyuncuların cevaplarını kontrol et eger hepsi cevaplamıssa timer baslat
+						if (DidIAnswer)
+						{
+							ButtonEnabled(true);
+						}
+					}
 				}
 			}
-			//Debug.Log("Ben Server ve Clientım");
+			
+
 
 		}
 	}
 	void ClientUpdate()
 	{
 		//Bu fonksiyon sadece ve sadece Clientlarda calısır, Eğer Client ve Server ise calısmaz..
-		if (isServer == true)
+		if (isServer == false)
 		{
-			return;
-		}
-		Timer.GetComponent<Text>().text = TurnTimer.ToString("0");
+			if (hasAuthority)
+			{
+				if (isLocalPlayer == true)
+				{
+					Timer.GetComponent<Text>().text = TurnTimer.ToString("0");
 
-		if (TurnTimer <= 0)
-		{
-			TurnTimer = 0;
-			checkAnswer("");
+					if (TurnTimer <= 0)
+					{
+						TurnTimer = 0;
+						checkAnswer("");
+					}
+				}
+			}			
 		}
-		//Debug.Log("Ben Clientım");
+
 	}
 
-	IEnumerator RpcSetQuestionIE(int question, int option)
+
+	void onvalueChanged(int health)
 	{
-		yield return new WaitForSeconds(0.0f);
-		RpcSetQuestion(question, option);
+		health = 200;
+	}
+	IEnumerator RpcSetQuestionIE()
+	{
+		yield return new WaitForSeconds(0.1f);
+		setQuestionAndOption();
+		syncIT_1 = 100;
+		syncIT_2 = 200;
+
+		RpcSetQuestion(rndmQuestionNumber, rndmOptionNumber);
 	}
 
 	[ClientRpc]
 	private void RpcSetQuestion(int question, int option)
 	{
-		//TODO: Bir sekilde client ve server icin soru olusturulurken cevaplar eşleşmiyor. Eşleşiyo olabilir ama buttonların icindeki textleri almıyor!!
+		//TODO: Bir sekilde client ve server icin soru olusturulurken cevaplar eşleşmiyor.
+		Debug.Log("SERVER TARAFINDAN GÖNDERİLEN "+ question + " " + option +" " + "İLE SORUMU OLUŞTURDUM");
 		DidIAnswer = false;
 		CanvasEnabled(false);
 		ButtonEnabled(false);
