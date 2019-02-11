@@ -12,12 +12,12 @@ public class GameManager : NetworkBehaviour
 
 	public static QuestionList QuestionList = new QuestionList();
 
-	[SyncVar] public int rndmQuestionNumber;
-	[SyncVar] public int rndmOptionNumber;
-	[SyncVar] public float TurnTimer;
+	public int rndmQuestionNumber;
+	public int rndmOptionNumber;
+	public float TurnTimer;
 
-	[SyncVar] public int syncIT_1;
-	[SyncVar] public int syncIT_2;
+	[SyncVar]public int sync_IT1;
+	[SyncVar]public int sync_IT2;
 
 	Button NextQuestionButton;
 	GameObject NextQuestionButtonGO;
@@ -30,6 +30,7 @@ public class GameManager : NetworkBehaviour
 	Button Option_4;
 
 	bool RunOnce = true;
+	bool RunONCE = true;
 	bool DidIAnswer = false;
 	public bool CanvasShow = false;
 	public bool ButtonShow = false;
@@ -60,6 +61,7 @@ public class GameManager : NetworkBehaviour
 		ButtonEnabled(false);
 		getQuestionList();
 	}
+
 	private void CanvasEnabled(bool ISIT)
 	{
 		// Bu Arayüz Canvasının kontrol(show/hide) fonksiyonu!
@@ -104,68 +106,60 @@ public class GameManager : NetworkBehaviour
 			Debug.Log("Assets are null!");
 		}
 	}
-	private void setQuestionAndOption()
-	{
-		// Bu fonksiyon rastgele 1 soru ve 1 secenek seciyor.
-		// FIXME: BU FONKSİYON 2 DEFA CALISIYOR
-		rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
-		rndmOptionNumber = Random.Range(1, 5);	
-		Debug.Log("SORU SECTİM: " + rndmQuestionNumber + "ŞIK SECTİM: " + rndmOptionNumber);
-	}
+
 
 	private void Update()
 	{
 		ServerUpdate();
-		ClientUpdate();
+		//ClientUpdate();
 	}
 	// TODO: SYNCVAR SADECE ISSERVER ALTINDA CALISIYOR BUNU DÜZELTMEN GEREK
 
-	void WillItSyncNow()
-	{
-		if (isServer)
-		{
-			syncIT_1 = 300;
-			syncIT_2 = 300;
-		}		
-	}
 	[Command]
-	void CmdSyncPlease()
+	void CmdStartATurn()
 	{
-		syncIT_1 = 400;
-		syncIT_2 = 400;
+		TurnTimer = TURN_TIME;
+		StartCoroutine(RpcSetQuestionIE());
+		RunOnce = false;
 	}
 	// TODO: rndmQuestionNumber & rndmOptionNumber somehow dont sync fix it. !!!
 	void ServerUpdate()
 	{
 		// Bu fonksiyon sadece Serverda calısır. Server aynı zamanda Clientsa'da calısır.
 		if (isServer)
-		{	
-			syncIT_1 = 100;
-			syncIT_2 = 100;
+		{
+			if (RunONCE)
+			{
+				sync_IT1 = Random.Range(0, 100);
+				sync_IT2 = Random.Range(0, 100);
+				RunONCE = false;
+			}
+			
+
+			TurnTimer -= Time.deltaTime;
+			RpcTurnTimerRemaining(TurnTimer);
+
+			if (isLocalPlayer)
+			{
+				if (RunOnce)
+				{
+					CmdStartATurn();
+				}
+			}
+			
+
+			if (TurnTimer <= 0)
+			{
+				TurnTimer = 0;
+				//Debug.Log("TUR BİTTİ");					
+				checkAnswer("");
+
+			}
+
 			if (hasAuthority)
 			{
-				syncIT_1 = 200;
-				syncIT_2 = 200;
 				if (isLocalPlayer == true)
 				{
-					WillItSyncNow();
-					CmdSyncPlease();
-					TurnTimer -= Time.deltaTime;
-					Timer.GetComponent<Text>().text = TurnTimer.ToString("0");
-					if (RunOnce)
-					{
-						TurnTimer = TURN_TIME;
-						StartCoroutine(RpcSetQuestionIE());
-						RunOnce = false;
-					}
-
-					if (TurnTimer <= 0)
-					{
-						TurnTimer = 0;
-						//Debug.Log("TUR BİTTİ");					
-						checkAnswer("");
-
-					}
 					if (CanvasShow)
 					{
 						//TODO: Diger oyuncuların cevaplarını kontrol et eger hepsi cevaplamıssa timer baslat
@@ -176,9 +170,6 @@ public class GameManager : NetworkBehaviour
 					}
 				}
 			}
-			
-
-
 		}
 	}
 	void ClientUpdate()
@@ -189,40 +180,42 @@ public class GameManager : NetworkBehaviour
 			if (hasAuthority)
 			{
 				if (isLocalPlayer == true)
-				{
-					Timer.GetComponent<Text>().text = TurnTimer.ToString("0");
-
+				{					
 					if (TurnTimer <= 0)
 					{
 						TurnTimer = 0;
 						checkAnswer("");
 					}
 				}
-			}			
+			}
 		}
 
 	}
 
-
-	void onvalueChanged(int health)
-	{
-		health = 200;
-	}
 	IEnumerator RpcSetQuestionIE()
 	{
-		yield return new WaitForSeconds(0.1f);
-		setQuestionAndOption();
-		syncIT_1 = 100;
-		syncIT_2 = 200;
+		yield return new WaitForSeconds(0.5f);
+		
+		rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
+		rndmOptionNumber = Random.Range(1, 5);
 
 		RpcSetQuestion(rndmQuestionNumber, rndmOptionNumber);
 	}
-
-	[ClientRpc]
-	private void RpcSetQuestion(int question, int option)
+	
+	[ClientRpc] void RpcTurnTimerRemaining(float turntimer)
 	{
-		//TODO: Bir sekilde client ve server icin soru olusturulurken cevaplar eşleşmiyor.
-		Debug.Log("SERVER TARAFINDAN GÖNDERİLEN "+ question + " " + option +" " + "İLE SORUMU OLUŞTURDUM");
+		Timer.GetComponent<Text>().text = turntimer.ToString("0");
+	}
+	[ClientRpc] void RpcDEGERUPDATE(int a, int b)
+	{
+		rndmQuestionNumber = a;
+		rndmOptionNumber = b;
+	}
+
+	[ClientRpc] private void RpcSetQuestion(int question, int option)
+	{		
+		RpcDEGERUPDATE(question, option);
+		Debug.Log("SERVER TARAFINDAN GÖNDERİLEN " + question + " " + option + " " + "İLE SORUMU OLUŞTURDUM");
 		DidIAnswer = false;
 		CanvasEnabled(false);
 		ButtonEnabled(false);
@@ -230,65 +223,59 @@ public class GameManager : NetworkBehaviour
 		QuestionText.GetComponentInChildren<Text>().text = QuestionList.Question[question].question;
 
 		GameObject.Find("Option_" + option).GetComponentInChildren<Text>().text = QuestionList.Question[question].answer.ToString();
-		generateOtherOptions();
-	}
 
-	void startNextTurn()
-	{
-		ButtonEnabled(false);
-		RunOnce = true;
-		TurnTimer = TURN_TIME;
+		generateOtherOptions(question, option);
 	}
-	void generateOtherOptions()
+	void generateOtherOptions(int question, int option)
 	{
 		// Bu fonksiyon secilen sorunun cevabını alıp eger cevap belli aralıklardan büyükse 
 		// ona göre MİN MAX olusturup generateOptionsTexts ine MİN MAX değerlerini gönderiyor
 		int min = 0;
 		int max = 0;
-		if (QuestionList.Question[rndmQuestionNumber].answer > 2000)
+		if (QuestionList.Question[question].answer > 2000)
 		{
 			max = 400;
-			generateOptionsTexts(min, max);
+			generateOptionsTexts(min, max, question, option);
 		}
-		else if (QuestionList.Question[rndmQuestionNumber].answer > 1000)
+		else if (QuestionList.Question[question].answer > 1000)
 		{
 			max = 100;
-			generateOptionsTexts(min, max);
+			generateOptionsTexts(min, max, question, option);
 		}
-		else if (QuestionList.Question[rndmQuestionNumber].answer > 500)
+		else if (QuestionList.Question[question].answer > 500)
 		{
 			max = 500;
-			generateOptionsTexts(min, max);
+			generateOptionsTexts(min, max, question, option);
 		}
-		else if (QuestionList.Question[rndmQuestionNumber].answer > 100)
+		else if (QuestionList.Question[question].answer > 100)
 		{
 			max = 100;
-			generateOptionsTexts(min, max);
+			generateOptionsTexts(min, max, question, option);
 		}
-		else if (QuestionList.Question[rndmQuestionNumber].answer > 10)
+		else if (QuestionList.Question[question].answer > 10)
 		{
 			max = 10;
-			generateOptionsTexts(min, max);
+			generateOptionsTexts(min, max, question, option);
 		}
 		else
 		{
 			max = 3;
-			generateOptionsTexts(min, max);
+			generateOptionsTexts(min, max, question, option);
 		}
 	}
-	void generateOptionsTexts(int min, int max)
+	void generateOptionsTexts(int min, int max, int question, int option)
 	{
 		// Bu fonksiyon her bir şık için almış olduğu MİN MAX değerlerini 
 		// o şıkkın Texti oluşturulması için generateText fonksiyonuna gönderiyor.
 		for (int i = 1; i <= 4; i++)
 		{
-			if (rndmOptionNumber == i)
+			if (option == i)
 			{
-				generateText(i, min, max);
+				generateText(i, min, max, question);
 			}
 		}
 	}
-	void generateText(int index, int min, int max)
+	void generateText(int index, int min, int max, int question)
 	{
 		// Bu fonksiyon dışarıdan gelen doğru cevap şıkkı MİN ve MAX değerini işleyip olusturduğu random sayının
 		// 2ye bölümüne göre çıkartıyor, topluyor ve doğru cevap ise hic ellemiyor bu şekilde 4 şık olusturuyor.
@@ -305,7 +292,7 @@ public class GameManager : NetworkBehaviour
 				}
 				else
 				{
-					GameObject.Find("Option_" + i).GetComponentInChildren<Text>().text = (QuestionList.Question[rndmQuestionNumber].answer + rndm).ToString();
+					GameObject.Find("Option_" + i).GetComponentInChildren<Text>().text = (QuestionList.Question[question].answer + rndm).ToString();
 				}
 			}
 			else
@@ -316,16 +303,24 @@ public class GameManager : NetworkBehaviour
 				}
 				else
 				{
-					GameObject.Find("Option_" + i).GetComponentInChildren<Text>().text = (QuestionList.Question[rndmQuestionNumber].answer - rndm).ToString();
+					GameObject.Find("Option_" + i).GetComponentInChildren<Text>().text = (QuestionList.Question[question].answer - rndm).ToString();
 				}
 			}
 		}
 
 
 	}
+
+	void startNextTurn()
+	{
+		ButtonEnabled(false);
+		RunOnce = true;
+		TurnTimer = TURN_TIME;
+	}
+
 	public void option1Clicked()
 	{
-		if (hasAuthority)
+		if (isLocalPlayer)
 		{
 			checkText = Option_1.GetComponentInChildren<Text>().text;
 			checkAnswer(checkText);
@@ -333,7 +328,7 @@ public class GameManager : NetworkBehaviour
 	}
 	public void option2Clicked()
 	{
-		if (hasAuthority)
+		if (isLocalPlayer)
 		{
 			checkText = Option_2.GetComponentInChildren<Text>().text;
 			checkAnswer(checkText);
@@ -341,7 +336,7 @@ public class GameManager : NetworkBehaviour
 	}
 	public void option3Clicked()
 	{
-		if (hasAuthority)
+		if (isLocalPlayer)
 		{
 			checkText = Option_3.GetComponentInChildren<Text>().text;
 			checkAnswer(checkText);
@@ -349,13 +344,12 @@ public class GameManager : NetworkBehaviour
 	}
 	public void option4Clicked()
 	{
-		if (hasAuthority)
+		if (isLocalPlayer)
 		{
 			checkText = Option_4.GetComponentInChildren<Text>().text;
 			checkAnswer(checkText);
 		}
 	}
-
 
 	void checkAnswer(string text)
 	{
@@ -368,12 +362,12 @@ public class GameManager : NetworkBehaviour
 		if (QuestionList.Question[rndmQuestionNumber].answer.ToString() == answer)
 		{
 			IpCanvas.GetComponentInChildren<Text>().text = "Doğru Cevap";
-			//Debug.Log("Doğru Cevap");
+			Debug.Log("Doğru Cevap");
 		}
 		else
 		{
 			IpCanvas.GetComponentInChildren<Text>().text = "Yanlış Cevap";
-			//Debug.Log("Yanlış Cevap");
+			Debug.Log("Yanlış Cevap: " + text + " , " + " Doğru Cevap: " + QuestionList.Question[rndmQuestionNumber].answer.ToString());
 		}
 	}
 }
