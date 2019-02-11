@@ -1,4 +1,7 @@
-﻿//using System.Collections;
+﻿//#pragma warning disable CS0618
+
+
+//using System.Collections;
 //using System.Collections.Generic;
 //using UnityEngine;
 //using UnityEngine.Networking;
@@ -18,10 +21,9 @@
 //	GameObject Timer;
 
 
-//	bool RunOnce = true;
-//	bool DidIAnswer = false;
-//	public bool CanvasShow = false;
-//	public bool ButtonShow = false;
+//	public int SelectedQuestion;
+//	public int SelectedOption;
+
 //	string checkText = "";
 
 
@@ -72,37 +74,10 @@
 
 //	void Update()
 //	{
-		
-//	}
-	
+//		Debug.Log(SelectedQuestion + " " + SelectedOption);
 
-//	private void CanvasEnabled(bool ISIT)
-//	{
-//		// Bu Arayüz Canvasının kontrol(show/hide) fonksiyonu!
-//		if (ISIT)
-//		{
-//			IpCanvas.GetComponent<Canvas>().enabled = ISIT;
-//		}
-//		else
-//		{
-//			IpCanvas.GetComponent<Canvas>().enabled = ISIT;
-//		}
+//		Debug.Log("Soru: " + QuestionList.Question[SelectedQuestion].question + " Sorunun Cevabı: " + QuestionList.Question[SelectedQuestion].answer.ToString());
 
-//		CanvasShow = ISIT;
-//	}
-//	private void ButtonEnabled(bool ISIT)
-//	{
-//		// Bu Arayüz Canvasındaki BUTTONun kontrol(show/hide) fonksiyonu!
-//		if (ISIT)
-//		{
-//			NextQuestionButtonGO.GetComponent<Canvas>().enabled = ISIT;
-//		}
-//		else
-//		{
-//			NextQuestionButtonGO.GetComponent<Canvas>().enabled = ISIT;
-//		}
-
-//		ButtonShow = ISIT;
 //	}
 
 //	public void option1Clicked()
@@ -110,11 +85,9 @@
 //		if (hasAuthority)
 //		{
 //			checkText = Option_1.GetComponentInChildren<Text>().text;
-//			Debug.Log("Sorunun Cevabı: " + QuestionList.Question[GameManager.SelectedQuestion].answer.ToString() + " . Senin sectigin cevap: " + checkText);
+//			Debug.Log("Sorunun Cevabı: " + QuestionList.Question[SelectedQuestion].answer.ToString() + " . Senin sectigin cevap: " + checkText);
 //			CheckMyAnswer(checkText);
 
-//			CanvasEnabled(true);
-//			ButtonEnabled(true);
 //		}
 //	}
 //	public void option2Clicked()
@@ -122,11 +95,10 @@
 //		if (hasAuthority)
 //		{
 //			checkText = Option_2.GetComponentInChildren<Text>().text;
-//			Debug.Log("Sorunun Cevabı: " + QuestionList.Question[GameManager.SelectedQuestion].answer.ToString() + " . Senin sectigin cevap: " + checkText);
+//			Debug.Log("Sorunun Cevabı: " + QuestionList.Question[SelectedQuestion].answer.ToString() + " . Senin sectigin cevap: " + checkText);
 //			CheckMyAnswer(checkText);
 
-//			CanvasEnabled(true);
-//			ButtonEnabled(true);
+			
 //		}
 //	}
 //	public void option3Clicked()
@@ -134,12 +106,10 @@
 //		if (hasAuthority)
 //		{
 //			checkText = Option_3.GetComponentInChildren<Text>().text;
-//			Debug.Log("Sorunun Cevabı: " + QuestionList.Question[GameManager.SelectedQuestion].answer.ToString() + " . Senin sectigin cevap: " + checkText);
+//			Debug.Log("Sorunun Cevabı: " + QuestionList.Question[SelectedQuestion].answer.ToString() + " . Senin sectigin cevap: " + checkText);
 //			CheckMyAnswer(checkText);
 
 
-//			CanvasEnabled(true);
-//			ButtonEnabled(true);
 //		}
 //	}
 //	public void option4Clicked()
@@ -147,28 +117,25 @@
 //		if (hasAuthority)
 //		{
 //			checkText = Option_4.GetComponentInChildren<Text>().text;
-//			Debug.Log("Sorunun Cevabı: " + QuestionList.Question[GameManager.SelectedQuestion].answer.ToString() + " . Senin sectigin cevap: " + checkText);
+//			Debug.Log("Sorunun Cevabı: " + QuestionList.Question[SelectedQuestion].answer.ToString() + " . Senin sectigin cevap: " + checkText);
 //			CheckMyAnswer(checkText);
 
-//			CanvasEnabled(true);
-//			ButtonEnabled(true);
+			
 //		}
 //	}
 
-	
+
 //	void CheckMyAnswer(string text)
 //	{
 //		string answer = text;
 
-//		if (QuestionList.Question[GameManager.SelectedQuestion].answer.ToString() == answer)
+//		if (QuestionList.Question[SelectedQuestion].answer.ToString() == answer)
 //		{
-//			IpCanvas.GetComponentInChildren<Text>().text = "Doğru Cevap";
-//			//Debug.Log("Doğru Cevap");
+			
 //		}
 //		else
 //		{
-//			IpCanvas.GetComponentInChildren<Text>().text = "Yanlış Cevap";
-//			//Debug.Log("Yanlış Cevap");
+			
 //		}
 //	}
 //}

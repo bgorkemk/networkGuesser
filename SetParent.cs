@@ -9,7 +9,6 @@ public class SetParent : MonoBehaviour
     {
 		GameObject obj = GameObject.Find("Canvas");
 		gameObject.transform.SetParent(obj.transform);
-	
     }
    
 }
