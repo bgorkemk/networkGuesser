@@ -14,16 +14,15 @@ public class GameManager : NetworkBehaviour
 
 	public static QuestionList QuestionList = new QuestionList();
 
-	[SyncVar] public int syncIT;
-
-	[SyncVar] public int rndmQuestionNumber = 30;
-	[SyncVar] public int rndmOptionNumber = 1;
+	public int rndmQuestionNumber;
+	public int rndmOptionNumber;
 
 	Button NextQuestionButton;
 	GameObject NextQuestionButtonGO;
 	GameObject IpCanvas;
 	GameObject Timer;
 	GameObject QuestionText;
+	GameObject Player;
 	Button Option_1;
 	Button Option_2;
 	Button Option_3;
@@ -38,20 +37,20 @@ public class GameManager : NetworkBehaviour
 	public bool ButtonShow = false;
 	[NonSerialized]
 	public bool RunOnce = true;
-	[NonSerialized]
-	public string checkText = "";
+
+	string checkText = "";
 	public float TurnTimer;
-	bool bir = false;
+
 	// FUNCTIONS
 	private void Start()
-	{
+	{		
 		IpCanvas = GameObject.Find("IPCanvas");
 		Timer = GameObject.Find("Timer");
 
 		NextQuestionButton = IpCanvas.GetComponentInChildren<Button>();
 		NextQuestionButton.onClick.AddListener(startNextTurn);
 		NextQuestionButtonGO = GameObject.Find("NextButton");
-
+		Player = GameObject.Find("Player");
 		QuestionText = GameObject.Find("Question");
 		Option_1 = GameObject.Find("Option_1").GetComponent<Button>();
 		Option_2 = GameObject.Find("Option_2").GetComponent<Button>();
@@ -114,14 +113,8 @@ public class GameManager : NetworkBehaviour
 	private void Update()
 	{
 		// SERVERSA 5 ER 5 ER EKLİYOR VE SYNCLİYOR
-		// CLİENTSA 400 EKLİYOR AMA SYNCLEMİYOR COMMANDDE CALISIYO NE ALAKA!!
-		if (isServer & Input.GetKeyDown(KeyCode.A))
-			syncIT += 5;
-		else if (isLocalPlayer & Input.GetKeyDown(KeyCode.A))
-		{
-			Debug.Log("calismiyo asdoasd");
-			CmdSyncPlease();
-		}
+		// CLİENTSA 400 EKLİYOR AMA SYNCLEMİYOR COMMANDDE CALISIYO NE ALAKA!!		
+
 		ServerUpdate();
 	}
 
@@ -130,14 +123,6 @@ public class GameManager : NetworkBehaviour
 		// Bu fonksiyon sadece Serverda calısır. Server aynı zamanda Clientsa'da calısır.
 		if (isServer)
 		{
-			
-			if (bir)
-			{
-				Debug.Log("OYUN BASLADI");
-				Debug.Log(rndmQuestionNumber +" "+ rndmOptionNumber);
-				CmdUpdate(rndmQuestionNumber, rndmOptionNumber);
-				bir = false;
-			}
 			if (isLocalPlayer)
 			{
 				TurnTimer -= Time.deltaTime;
@@ -168,7 +153,7 @@ public class GameManager : NetworkBehaviour
 	IEnumerator RpcSetQuestionIE()
 	{
 		yield return new WaitForSeconds(0.5f);
-		bir = true;
+
 		RpcSetQuestion(rndmQuestionNumber, rndmOptionNumber);
 	}
 	[ClientRpc]
@@ -190,16 +175,6 @@ public class GameManager : NetworkBehaviour
 	void RpcTurnTimerRemaining(float turntimer)
 	{
 		Timer.GetComponent<Text>().text = turntimer.ToString("0");
-	}
-	[Command]
-	void CmdSyncPlease()
-	{
-		syncIT += 400;
-	}
-	[Command]
-	void CmdUpdate(int question, int option)
-	{
-		Debug.Log("CMD İCİ "+question + " " + option);			
 	}
 
 	[ClientRpc]
@@ -314,8 +289,10 @@ public class GameManager : NetworkBehaviour
 		TurnTimer = TURN_TIME;
 		rndmQuestionNumber = Random.Range(0, QuestionList.Question.Count + 1);
 		rndmOptionNumber = Random.Range(1, 5);
+		
+
 		StartCoroutine(RpcSetQuestionIE());
-		RunOnce = false;		
+		RunOnce = false;
 	}
 	void startNextTurn()
 	{
@@ -329,8 +306,10 @@ public class GameManager : NetworkBehaviour
 	{
 		if (isLocalPlayer)
 		{
-			checkText = Option_1.GetComponentInChildren<Text>().text;
-			checkAnswer(checkText);
+			
+			this.checkText = Option_1.GetComponentInChildren<Text>().text;
+			Debug.Log("CEVABIM: " + checkText);
+			checkAnswer(this.checkText);
 		}
 	}
 	public void option2Clicked()
@@ -361,14 +340,15 @@ public class GameManager : NetworkBehaviour
 
 	void checkAnswer(string text)
 	{
-		DidIAnswer = true;
-		string answer = text;
 
+		DidIAnswer = true;
+		
 		CanvasEnabled(true);
 		ButtonEnabled(true);
+		Debug.Log(Player.GetComponent<GameManager>().rndmQuestionNumber);
 
-		if (QuestionList.Question[rndmQuestionNumber].answer.ToString() == answer)
-		{
+		if (QuestionList.Question[Player.GetComponent<GameManager>().rndmQuestionNumber].answer.ToString() == text)
+		{			
 			IpCanvas.GetComponentInChildren<Text>().text = "Doğru Cevap";
 			//Debug.Log("Doğru Cevap");
 		}
